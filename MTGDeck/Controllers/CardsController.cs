@@ -21,8 +21,14 @@ namespace MTGDeck.Controllers
     {
       _userManager = userManager;
       _db = db;
-    }
+    // }
+    // public IActionResult Search(string name, string color, string type)
+    // {
+    // List<Card> result = Card.SearchCards(name, color, type);
+    // return View(result);
+    // }
   }
+}
 }
 
 //     public async Task<ActionResult> Index()

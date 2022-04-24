@@ -13,6 +13,13 @@ namespace MTGDeck.Models
       var response = await client.ExecuteTaskAsync(request);
       return response.Content;
     }
+    public static async Task<string> Search(string name, string color, string type)
+    {
+      RestClient client = new RestClient("https://api.scryfall.com");
+      RestRequest request = new RestRequest($"cards/search?q={name} c:{color} t:{type}", Method.GET);
+      var response = await client.ExecuteTaskAsync(request);
+      return response.Content;
+    }
   }
 }
 //https://api.scryfall.com/cards/search?q=obzedat c:b t:creature

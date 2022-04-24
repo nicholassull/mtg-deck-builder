@@ -11,7 +11,6 @@ namespace MTGDeck.Models
         public string Legalities { get; set; }
         public string Set_Name { get; set; }
         public string Rulings_Uri { get; set; }
-        public string Image_Uris { get; set; }
-        
+        public string Image_Uris { get; set; } 
     }
 }

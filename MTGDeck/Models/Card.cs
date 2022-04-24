@@ -2,6 +2,7 @@ namespace MTGDeck.Models
 {
     public class Card
     {
+        public int CardId { get; set; }
         public string Name { get; set; }
         public string Mana_Cost { get; set; }
         public string Colors { get; set; }

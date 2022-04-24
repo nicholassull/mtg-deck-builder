@@ -6,13 +6,6 @@ namespace MTGDeck.Models
 {
   class ApiHelper
   {
-    // public static async Task<string> GetAll()
-    // {
-    //   RestClient client = new RestClient("https://api.scryfall.com");
-    //   RestRequest request = new RestRequest($"animals", Method.GET);
-    //   var response = await client.ExecuteTaskAsync(request);
-    //   return response.Content;
-    // }
     public static async Task<string> Get(string name, string color, string type)
     {
       RestClient client = new RestClient("https://api.scryfall.com");

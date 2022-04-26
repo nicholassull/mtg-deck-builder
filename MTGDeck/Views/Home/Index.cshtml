@@ -1,0 +1,42 @@
+@{
+  Layout = "_Layout";
+}
+
+@using MTGDeck.Models;
+
+<div class="container-fluid">
+  <div class="d-flex justify-content-center"> 
+    <h1 id="title" style="font-size:12vw">Magic</h1>
+  </div>
+  <div class="d-flex justify-content-center"> 
+    <h1 id="subTitle" style="font-size:3vw">the Gathering</h1>
+  </div>
+    <h5>Welcome to Magic the Gathering fantasy deck builder</h5>
+
+    <p>@Html.ActionLink("Create an account", "Register", "Account",  null, new { id = "OT",style = "color: rgb(236, 54, 197);" })</p>
+
+  @* <div class="row row-cols-2 row-cols-md-2 g-4">
+    @foreach (Card card in Model)
+    {
+      <div class="col">
+        <div class="card">
+          <div class="card-header">@Html.ActionLink($"{card.Name}", "Details", "Cards", new { id = card.CardId })</div>
+          <div class="card-body text-success">
+            <h5 class="card-title">Name</h5>
+            <p class="card-text">
+            @card.Name
+            </p>
+          </div>
+          <div class="card-footer">
+            <p>
+            @foreach(var join in card.JoinEntities)
+              {
+                @Html.ActionLink($"{join.Deck.Name}  ", "Details", "Decks", new { id = join.Deck.DeckId })<text>&nbsp;&nbsp;&nbsp;</text> 
+              } 
+            </p>  
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</div> *@

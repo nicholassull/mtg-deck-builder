@@ -1,0 +1,26 @@
+@{
+  Layout = "_Layout";
+}
+
+@using MTGDeck.Models;
+@model IEnumerable<MTGDeck.Models.Deck>
+
+<h1>Decks built for @User.Identity.Name</h1>
+
+@if (Model.Any())
+{
+  <ul>
+    @foreach (Deck deck in Model)
+    {
+      <li>@Html.ActionLink($"{deck.Name}", "Details", new { id = deck.DeckId })</li>
+    }
+  </ul>
+} 
+else
+{
+  <h3>No decks have been built yet!</h3>
+}
+
+<p>@Html.ActionLink("Add new deck", "Create")</p>
+
+<p>@Html.ActionLink("Home", "Index", "Home")</p>

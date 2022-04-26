@@ -7,6 +7,10 @@ namespace MTGDeck.Models
 {
     public class Card
     {
+      public Card()
+      {
+        this.JoinEntities = new HashSet<CardDeck>();
+      }
         public int CardId { get; set; }
         public string Name { get; set; }
         public string Mana_Cost { get; set; }
@@ -16,7 +20,8 @@ namespace MTGDeck.Models
         public string Legalities { get; set; }
         public string Set_Name { get; set; }
         public string Rulings_Uri { get; set; }
-        public string Image_Uris { get; set; } 
+        public string Image_Uris { get; set; }
+        public virtual ICollection<CardDeck> JoinEntities {get; set; }
 
     //Should this return a List<Card> instead of a string?
     public static List<Card> SearchCards(string name, string color, string type)

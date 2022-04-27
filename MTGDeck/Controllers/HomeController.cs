@@ -20,7 +20,10 @@ namespace MTGDeck.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var allCards = Card.SearchCards("", "", "elf");
+            // string cardImages = Card.SearchImage("", "", "elf");
+            // ViewBag.CardImages = cardImages;
+            return View(allCards);
         }
 
         public IActionResult Privacy()

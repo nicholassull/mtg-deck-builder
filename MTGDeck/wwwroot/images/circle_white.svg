@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   width="6.8530488mm"
+   height="6.7959495mm"
+   viewBox="0 0 6.8530488 6.7959495"
+   version="1.1"
+   id="svg5877">
+  <defs
+     id="defs5871">
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter907">
+      <feGaussianBlur
+         stdDeviation="2.3"
+         in="SourceAlpha"
+         result="result0"
+         id="feGaussianBlur881" />
+      <feMorphology
+         in="SourceAlpha"
+         radius="6.6"
+         result="result1"
+         id="feMorphology883" />
+      <feGaussianBlur
+         stdDeviation="8.9"
+         in="result1"
+         id="feGaussianBlur885" />
+      <feColorMatrix
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.3 0"
+         result="result91"
+         id="feColorMatrix887" />
+      <feComposite
+         in="result0"
+         operator="out"
+         result="result2"
+         in2="result91"
+         id="feComposite889" />
+      <feGaussianBlur
+         stdDeviation="1.7"
+         result="result4"
+         id="feGaussianBlur891" />
+      <feDiffuseLighting
+         surfaceScale="10"
+         id="feDiffuseLighting895">
+        <feDistantLight
+           azimuth="225"
+           elevation="45"
+           id="feDistantLight893" />
+      </feDiffuseLighting>
+      <feBlend
+         in2="SourceGraphic"
+         mode="multiply"
+         id="feBlend897" />
+      <feComposite
+         in2="SourceAlpha"
+         operator="in"
+         result="result3"
+         id="feComposite899" />
+      <feSpecularLighting
+         in="result4"
+         surfaceScale="5"
+         specularExponent="17.89999962"
+         id="feSpecularLighting903">
+        <feDistantLight
+           azimuth="225"
+           elevation="45"
+           id="feDistantLight901" />
+      </feSpecularLighting>
+      <feComposite
+         in2="result3"
+         operator="atop"
+         id="feComposite905" />
+    </filter>
+  </defs>
+  <metadata
+     id="metadata5874">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     transform="translate(-95.976305,-130.19943)">
+    <g
+       id="g5854"
+       transform="translate(6.2638077,33.031168)">
+      <path
+         id="path868"
+         style="opacity:0.794212;fill:#ffffe2;fill-opacity:1;stroke:#0c0c0c;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;filter:url(#filter907)"
+         transform="matrix(0.08973513,0.24890148,-0.24890148,0.08973513,156.156,-21.160122)"
+         d="m 351.94922,371.62109 c -1.44518,-1.9e-4 -2.87439,0.47503 -4.36524,1.36914 -1.1726,0.70325 -2.13652,1.64057 -2.82812,2.76172 -0.8738,1.41654 -1.05664,2.14661 -1.05664,4.30078 0,2.09049 0.1846,2.89536 0.96484,4.22266 1.05389,1.79284 3.11323,3.4145 5.07032,3.97656 2.85115,0.81884 5.90146,0.003 8.04101,-2.13672 3.94772,-3.94771 3.25388,-10.29969 -1.45703,-13.125 a 0.60197066,0.60197066 0 0 0 -0.002,0 c -1.49203,-0.89464 -2.92232,-1.36895 -4.36719,-1.36914 z" />
+      <circle
+         style="fill:none;stroke:#000000;stroke-width:0.25;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+         id="path24"
+         cx="93.125397"
+         cy="100.56641"
+         r="2.2548521" />
+    </g>
+  </g>
+</svg>

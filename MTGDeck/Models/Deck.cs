@@ -23,5 +23,6 @@ namespace MTGDeck.Models
     // public IDictionary<int, int> Mana { get; set; }
     public string Colors { get; set; }
     public virtual ICollection<CardDeck> JoinEntities { get; set; }
+    public virtual ApplicationUser User { get; set; } 
   }
 }

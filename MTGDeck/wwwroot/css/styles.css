@@ -1,7 +1,32 @@
-#logo {
-  font-family: 'Rock 3D', cursive;
-  color: rgb(42, 206, 102);
+.logo {
+  width:70vw;
+  height:60vh;
+  
 }
+
+img {
+  position: relative;
+  margin-top: 20%;
+  max-width:100%;
+  height:auto;
+  max-height:100%;
+  z-index: 2;
+}
+
+.circles img {
+  position: relative;
+  width: 80vw;
+  height: 80vh;
+  margin-top: -70%;
+  z-index: 1;
+}
+
+.btn {
+  width: 10vw;
+  height:auto;
+  margin-top: 7%;
+}
+
 
 #title {
   font-family: 'Rock 3D', cursive;
@@ -15,7 +40,7 @@
 
 body {
   font-family: 'Courier New', Courier, monospace;
-  background-color: rgb(250, 251, 248);
+  background-color: #5f2626
 }
 
 .nav-link {
@@ -32,4 +57,9 @@ hr {
   color: #101010;
   margin-top: 3%;
   margin-bottom: 8%;
+}
+
+.btn-outline-dark {
+  color: rgb(206, 54, 236);
+  border-color: rgb(206, 54, 236);
 }

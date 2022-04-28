@@ -15,7 +15,9 @@
     <img src="~/images/circle_full_set.svg" alt="Elemental globes(don't sue me)" class="center" />
   </div>
 </div>
+<br>
 
+<img id="img_logo" alt="Logo" src="@Url.Content(ViewBag.CardImages)"/>
 
   <div class="row row-cols-2 row-cols-md-2 g-4">
     @foreach (Card card in Model)
@@ -27,6 +29,10 @@
             <h5 class="card-title">Name</h5>
             <p class="card-text">
             @card.Name
+            @card.Type_Line
+            @card.Mana_Cost
+            @card.Colors
+
             </p>
           </div>
           <div class="card-footer">
@@ -35,11 +41,10 @@
               {
                 @Html.ActionLink($"{join.Deck.Name}  ", "Details", "Decks", new { id = join.Deck.DeckId })<text>&nbsp;&nbsp;&nbsp;</text> 
               } 
-            </p>  
+            </p>
           </div>
         </div>
       </div>
     }
   </div>
-  <p>@ViewBag.CardImages</p>
 </div>

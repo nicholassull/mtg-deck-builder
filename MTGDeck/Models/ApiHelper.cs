@@ -20,6 +20,16 @@ namespace MTGDeck.Models
       var response = await client.ExecuteTaskAsync(request);
       return response.Content;
     }
+    //Searches for 1 specific card by fuzzy name
+    public static async Task<string> GetCard(string name)
+    {
+      RestClient client = new RestClient("https://api.scryfall.com");
+      RestRequest request = new RestRequest($"cards/named?fuzzy={name}", Method.GET);
+
+      var response = await client.ExecuteTaskAsync(request);
+      
+      return response.Content;
+    }
   }
 }
 //https://api.scryfall.com/cards/search?q=obzedat c:b t:creature

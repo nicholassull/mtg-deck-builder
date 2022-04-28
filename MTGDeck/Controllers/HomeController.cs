@@ -21,8 +21,8 @@ namespace MTGDeck.Controllers
         public IActionResult Index()
         {
             var allCards = Card.SearchCards("", "", "elf");
-            // string cardImages = Card.SearchImage("", "", "elf");
-            // ViewBag.CardImages = cardImages;
+            string cardImages = Card.GetCardImage("Aberrant Mind Sorcerer");
+            ViewBag.CardImages = Url.Content(cardImages);
             return View(allCards);
         }
 

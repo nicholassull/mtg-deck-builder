@@ -20,7 +20,7 @@ namespace MTGDeck.Models
         // public string Legalities { get; set; }
         public string Set_Name { get; set; }
         public string Rulings_Uri { get; set; }
-        // public string Image_Uris { get; set; }
+        public virtual IDictionary<string, string> Image_Uris { get; set; }
         public virtual ICollection<CardDeck> JoinEntities {get; set; }
         // public virtual ApplicationUser User { get; set; } 
 
@@ -29,23 +29,15 @@ namespace MTGDeck.Models
       var apiCallTask = ApiHelper.Search(name, colors, type);
       var result = apiCallTask.Result;
       JObject jsonResponse = JsonConvert.DeserializeObject<JObject>(result);
+      //How do we get this stored into the object?
+      //Should we make a second method and return the bellow result, using a viewbag to send it to the controller.
+      var imageInfo = jsonResponse["data"][0]["image_uris"]["normal"];
+      Console.WriteLine("=========" + imageInfo + "===========");
+
       List<Card> cardList = JsonConvert.DeserializeObject<List<Card>>(jsonResponse["data"].ToString());
       
       return cardList;
     }
-
-//     public static string SearchImage(string name, string colors, string type)
-//     {
-//       var apiCallTask = ApiHelper.Search(name, colors, type);
-//       var result = apiCallTask.Result;
-//   //the response from the api is being deserialized just as with the other methods like GetAll() and GetDetails()
-//       JObject jsonResponse = JsonConvert.DeserializeObject<JObject>(result);
-//       var imageInfo = jsonResponse["data"][0]["image_uris"]["small"];
-//       string imageResult = JsonConvert.DeserializeObject<string>(imageInfo.ToString());
-//       // string imageList = JsonConvert.DeserializeObject<string>(jsonResponse["data"][0]["image_uris"]["small"].ToString());
-//       Console.WriteLine("=========" + imageInfo + "===========");
-//       return imageResult;
-//     }
   }
 }
 

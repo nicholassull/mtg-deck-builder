@@ -4,42 +4,16 @@
 
 @using MTGDeck.Models;
 
-<div class="container-fluid">
+
+
   <div class="logo"> 
-    <img src="~/images/white_logo_1.svg" alt="Magic the Gathering logo(don't sue me)" class="center" />
+    <img src="~/images/white_logo_5.svg" alt="Magic the Gathering logo(don't sue me)" class="center" />
     
-    <div style="text-align:center;">
+    <div id="enterButton">
       <a class="btn btn-primary" href="http://localhost:5001/Account" role="button">Enter</a>
     </div>
-  <div class="circles">
-    <img src="~/images/circle_full_set.svg" alt="Elemental globes(don't sue me)" class="center" />
   </div>
-</div>
 
 
-  <div class="row row-cols-2 row-cols-md-2 g-4">
-    @foreach (Card card in Model)
-    {
-      <div class="col">
-        <div class="card">
-          <div class="card-header">@Html.ActionLink($"{card.Name}", "Details", "Cards", new { id = card.CardId })</div>
-          <div class="card-body text-success">
-            <h5 class="card-title">Name</h5>
-            <p class="card-text">
-            @card.Name
-            </p>
-          </div>
-          <div class="card-footer">
-            <p>
-            @foreach(var join in card.JoinEntities)
-              {
-                @Html.ActionLink($"{join.Deck.Name}  ", "Details", "Decks", new { id = join.Deck.DeckId })<text>&nbsp;&nbsp;&nbsp;</text> 
-              } 
-            </p>  
-          </div>
-        </div>
-      </div>
-    }
-  </div>
-  <p>@ViewBag.CardImages</p>
-</div>
+
+  

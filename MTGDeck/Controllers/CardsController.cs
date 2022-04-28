@@ -29,6 +29,15 @@ namespace MTGDeck.Controllers
     return View(result);
     }
 
+    [AllowAnonymous]
+    public IActionResult Index()
+        {
+            var allCards = Card.SearchCards("", "", "elf");
+            // string cardImages = Card.SearchImage("", "", "elf");
+            // ViewBag.CardImages = cardImages;
+            return View(allCards);
+        }
+    
     public ActionResult Create()
     {
       ViewBag.DeckId = new SelectList(_db.Decks, "DeckId", "Name");

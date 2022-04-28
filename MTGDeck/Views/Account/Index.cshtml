@@ -4,7 +4,11 @@
 
 @using System.Security.Claims
 
-<h2>Authentication with Identity</h2>
+<h1>Login</h1>
+
+<p>Welcome to Magic the Gathering fantasy deck builder. You must create an account to build and save your decks. Registration is free, but if that's too much of a drag, you can browse cards without an account @Html.ActionLink("Here", "Index", "Cards").</p>
+
+<h2>Get started by logging in or creating a free account!</h2>
 <hr />
 @if (User.Identity.IsAuthenticated)
 {

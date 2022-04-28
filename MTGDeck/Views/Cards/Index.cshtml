@@ -1,0 +1,26 @@
+@{
+  Layout = "_Layout";
+}
+
+@using MTGDeck.Models;
+@model IEnumerable<MTGDeck.Models.Card>
+
+<h1>Cards @User.Identity.Name</h1>
+
+@if (Model.Any())
+{
+  <ul>
+    @foreach (Card card in Model)
+    {
+      <li>@Html.ActionLink($"{card.Name}", "Details", new { id = card.CardId })</li>
+    }
+  </ul>
+} 
+else
+{
+  <h3>No cards have been selected!</h3>
+}
+
+<p>@Html.ActionLink("Add new deck", "Create")</p>
+
+<p>@Html.ActionLink("Home", "Index", "Home")</p>

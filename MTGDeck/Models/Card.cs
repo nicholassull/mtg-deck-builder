@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MTGDeck.Models
 {
@@ -14,15 +15,19 @@ namespace MTGDeck.Models
         public int CardId { get; set; }
         public string Name { get; set; }
         public string Mana_Cost { get; set; }
+        [NotMapped]
         public string[] Colors { get; set; }
+        public string ColorsAsString() { 
+            string s = "";
+            for (int i = 0; i < (Colors?.Length ?? 0); i++) {
+              s += Colors[i];
+              s += " ";
+            }
+            return s;
+            }
         public string Type_Line { get; set; }
-        public string Oracle_Text {get; set; }
-        // public string Legalities { get; set; }
         public string Set_Name { get; set; }
-        public string Rulings_Uri { get; set; }
-        public ImageUris ImageUri { get; set; }
-        public virtual ICollection<CardDeck> JoinEntities {get; set; }
-        // public virtual ApplicationUser User { get; set; } 
+        public virtual ICollection<CardDeck> JoinEntities {get; set; } 
 
     public static List<Card> SearchCards(string name, string colors, string type)
     {
@@ -30,472 +35,126 @@ namespace MTGDeck.Models
       var result = apiCallTask.Result;
       JObject jsonResponse = JsonConvert.DeserializeObject<JObject>(result);
       List<Card> cardList = JsonConvert.DeserializeObject<List<Card>>(jsonResponse["data"].ToString());
-      var imageInfo = jsonResponse["data"][0]["image_uris"]["normal"];
-      // Console.WriteLine("=========" + imageInfo + "===========");
-      
       return cardList;
     }
-    //Requires the name of one card and will return a url of its image.
+    // Requires the name of one card and will return a url of its image.
     public static string GetCardImage(string name)
     {
-      var apiCallTask = ApiHelper.GetCard(name);
-      var result = apiCallTask.Result;
-      JObject jsonResponse = JsonConvert.DeserializeObject<JObject>(result);
-      var imageUrl = jsonResponse["image_uris"]["normal"].ToString();
-      Console.WriteLine("=========" + imageUrl + "===========");
+      ScryfallCard card = ApiHelper.GetCard(name).Result;
+      string imageUrl = card.image_uris["normal"];
       return imageUrl;
+    }  
+    public static string GetLegalities(string name)
+    {
+      ScryfallCard card = ApiHelper.GetCard(name).Result;
+      string legalities = "";
+      foreach((string format, string legality) in card.legalities)
+      {
+        legalities += $"{format}: {legality} ";
+      }
+      return legalities;
+    }  
+    public static string GetPrices(string name)
+    {
+      ScryfallCard card = ApiHelper.GetCard(name).Result;
+      string prices = "";
+      foreach((string currency, string value) in card.prices)
+      {
+        prices += $"{currency}: {value} ";
+      }
+      return prices;
+    }  
+    public static string GetOracle(string name)
+    {
+      ScryfallCard card = ApiHelper.GetCard(name).Result;
+      string oracle = card.Oracle_Text;
+      return oracle;
+    }  
+    public static string GetFlavor(string name)
+    {
+      ScryfallCard card = ApiHelper.GetCard(name).Result;
+      string flavor = card.Flavor_Text;
+      return flavor;
     }
+  }
+
     public partial class ImageUris
     {
         [JsonProperty("normal")]
         public Uri Normal { get; set; }
     }
+  public partial class Legalities
+  {
+      [JsonProperty("standard")]
+      public string Standard { get; set; }
+
+      [JsonProperty("future")]
+      public string Future { get; set; }
+
+      [JsonProperty("historic")]
+      public string Historic { get; set; }
+
+      [JsonProperty("gladiator")]
+      public string Gladiator { get; set; }
+
+      [JsonProperty("pioneer")]
+      public string Pioneer { get; set; }
+
+      [JsonProperty("explorer")]
+      public string Explorer { get; set; }
+
+      [JsonProperty("modern")]
+      public string Modern { get; set; }
+
+      [JsonProperty("legacy")]
+      public string Legacy { get; set; }
+
+      [JsonProperty("pauper")]
+      public string Pauper { get; set; }
+
+      [JsonProperty("vintage")]
+      public string Vintage { get; set; }
+
+      [JsonProperty("penny")]
+      public string Penny { get; set; }
+
+      [JsonProperty("commander")]
+      public string Commander { get; set; }
+
+      [JsonProperty("brawl")]
+      public string Brawl { get; set; }
+
+      [JsonProperty("historicbrawl")]
+      public string Historicbrawl { get; set; }
+
+      [JsonProperty("alchemy")]
+      public string Alchemy { get; set; }
+
+      [JsonProperty("paupercommander")]
+      public string Paupercommander { get; set; }
+
+      [JsonProperty("duel")]
+      public string Duel { get; set; }
+
+      [JsonProperty("oldschool")]
+      public string Oldschool { get; set; }
+
+      [JsonProperty("premodern")]
+      public string Premodern { get; set; }
   }
+   public partial class Prices
+    {
+        [JsonProperty("usd")]
+        public string Usd { get; set; }
+
+        [JsonProperty("usd_foil")]
+        public string UsdFoil { get; set; }
+
+        [JsonProperty("eur")]
+        public string Eur { get; set; }
+
+        [JsonProperty("eur_foil")]
+        public string EurFoil { get; set; }
+
+    }
 }
-
-
-// <auto-generated />
-//
-// To parse this JSON data, add NuGet 'Newtonsoft.Json' then do:
-//
-//    using MTGDeck.Models;
-//
-//    var mtgDeckBuilder = MtgDeckBuilder.FromJson(jsonString);
-
-// namespace MTGDeck.Models
-// {
-//     using System;
-//     using System.Collections.Generic;
-
-//     using System.Globalization;
-//     using Newtonsoft.Json;
-//     using Newtonsoft.Json.Converters;
-
-//     public partial class Card
-//     {
-//         public int CardId { get; set; }
-//         public virtual ICollection<CardDeck> JoinEntities {get; set; }
-
-//         [JsonProperty("object")]
-//         public string Object { get; set; }
-
-//         [JsonProperty("id")]
-//         public Guid Id { get; set; }
-
-//         [JsonProperty("oracle_id")]
-//         public Guid OracleId { get; set; }
-
-//         [JsonProperty("multiverse_ids")]
-//         public long[] MultiverseIds { get; set; }
-
-//         [JsonProperty("mtgo_id")]
-//         public long MtgoId { get; set; }
-
-//         [JsonProperty("arena_id")]
-//         public long ArenaId { get; set; }
-
-//         [JsonProperty("tcgplayer_id")]
-//         public long TcgplayerId { get; set; }
-
-//         [JsonProperty("cardmarket_id")]
-//         public long CardmarketId { get; set; }
-
-//         [JsonProperty("name")]
-//         public string Name { get; set; }
-
-//         [JsonProperty("lang")]
-//         public string Lang { get; set; }
-
-//         [JsonProperty("released_at")]
-//         public DateTimeOffset ReleasedAt { get; set; }
-
-//         [JsonProperty("uri")]
-//         public Uri Uri { get; set; }
-
-//         [JsonProperty("scryfall_uri")]
-//         public Uri ScryfallUri { get; set; }
-
-//         [JsonProperty("layout")]
-//         public string Layout { get; set; }
-
-//         [JsonProperty("highres_image")]
-//         public bool HighresImage { get; set; }
-
-//         [JsonProperty("image_status")]
-//         public string ImageStatus { get; set; }
-
-//         [JsonProperty("image_uris")]
-//         public ImageUris ImageUris { get; set; }
-
-//         [JsonProperty("mana_cost")]
-//         public string ManaCost { get; set; }
-
-//         [JsonProperty("cmc")]
-//         public long Cmc { get; set; }
-
-//         [JsonProperty("type_line")]
-//         public string TypeLine { get; set; }
-
-//         [JsonProperty("oracle_text")]
-//         public string OracleText { get; set; }
-
-//         [JsonProperty("power")]
-//         [JsonConverter(typeof(ParseStringConverter))]
-//         public long Power { get; set; }
-
-//         [JsonProperty("toughness")]
-//         [JsonConverter(typeof(ParseStringConverter))]
-//         public long Toughness { get; set; }
-
-//         [JsonProperty("colors")]
-//         public string[] Colors { get; set; }
-
-//         [JsonProperty("color_identity")]
-//         public string[] ColorIdentity { get; set; }
-
-//         [JsonProperty("keywords")]
-//         public string[] Keywords { get; set; }
-
-//         [JsonProperty("legalities")]
-//         public Legalities Legalities { get; set; }
-
-//         [JsonProperty("games")]
-//         public string[] Games { get; set; }
-
-//         [JsonProperty("reserved")]
-//         public bool Reserved { get; set; }
-
-//         [JsonProperty("foil")]
-//         public bool Foil { get; set; }
-
-//         [JsonProperty("nonfoil")]
-//         public bool Nonfoil { get; set; }
-
-//         [JsonProperty("finishes")]
-//         public string[] Finishes { get; set; }
-
-//         [JsonProperty("oversized")]
-//         public bool Oversized { get; set; }
-
-//         [JsonProperty("promo")]
-//         public bool Promo { get; set; }
-
-//         [JsonProperty("reprint")]
-//         public bool Reprint { get; set; }
-
-//         [JsonProperty("variation")]
-//         public bool Variation { get; set; }
-
-//         [JsonProperty("set_id")]
-//         public Guid SetId { get; set; }
-
-//         [JsonProperty("set")]
-//         public string Set { get; set; }
-
-//         [JsonProperty("set_name")]
-//         public string SetName { get; set; }
-
-//         [JsonProperty("set_type")]
-//         public string SetType { get; set; }
-
-//         [JsonProperty("set_uri")]
-//         public Uri SetUri { get; set; }
-
-//         [JsonProperty("set_search_uri")]
-//         public Uri SetSearchUri { get; set; }
-
-//         [JsonProperty("scryfall_set_uri")]
-//         public Uri ScryfallSetUri { get; set; }
-
-//         [JsonProperty("rulings_uri")]
-//         public Uri RulingsUri { get; set; }
-
-//         [JsonProperty("prints_search_uri")]
-//         public Uri PrintsSearchUri { get; set; }
-
-//         [JsonProperty("collector_number")]
-//         [JsonConverter(typeof(ParseStringConverter))]
-//         public long CollectorNumber { get; set; }
-
-//         [JsonProperty("digital")]
-//         public bool Digital { get; set; }
-
-//         [JsonProperty("rarity")]
-//         public string Rarity { get; set; }
-
-//         [JsonProperty("flavor_text")]
-//         public string FlavorText { get; set; }
-
-//         [JsonProperty("card_back_id")]
-//         public Guid CardBackId { get; set; }
-
-//         [JsonProperty("artist")]
-//         public string Artist { get; set; }
-
-//         [JsonProperty("artist_ids")]
-//         public Guid[] ArtistIds { get; set; }
-
-//         [JsonProperty("illustration_id")]
-//         public Guid IllustrationId { get; set; }
-
-//         [JsonProperty("border_color")]
-//         public string BorderColor { get; set; }
-
-//         [JsonProperty("frame")]
-//         [JsonConverter(typeof(ParseStringConverter))]
-//         public long Frame { get; set; }
-
-//         [JsonProperty("security_stamp")]
-//         public string SecurityStamp { get; set; }
-
-//         [JsonProperty("full_art")]
-//         public bool FullArt { get; set; }
-
-//         [JsonProperty("textless")]
-//         public bool Textless { get; set; }
-
-//         [JsonProperty("booster")]
-//         public bool Booster { get; set; }
-
-//         [JsonProperty("story_spotlight")]
-//         public bool StorySpotlight { get; set; }
-
-//         [JsonProperty("edhrec_rank")]
-//         public long EdhrecRank { get; set; }
-
-//         [JsonProperty("preview")]
-//         public Preview Preview { get; set; }
-
-//         [JsonProperty("prices")]
-//         public Prices Prices { get; set; }
-
-//         [JsonProperty("related_uris")]
-//         public RelatedUris RelatedUris { get; set; }
-
-//         [JsonProperty("purchase_uris")]
-//         public PurchaseUris PurchaseUris { get; set; }
-//         public static List<Card> SearchCards(string name, string colors, string type)
-//     {
-//       var apiCallTask = ApiHelper.Search(name, colors, type);
-//       var result = apiCallTask.Result;
-//       JObject jsonResponse = JsonConvert.DeserializeObject<JObject>(result);
-//       List<Card> cardList = JsonConvert.DeserializeObject<List<Card>>(jsonResponse["data"].ToString());
-//       var imageInfo = jsonResponse["data"][0]["image_uris"]["normal"];
-//       Console.WriteLine("=========" + imageInfo + "===========");
-      
-//       return cardList;
-//     }
-//     }
-
-//     public partial class ImageUris
-//     {
-//         [JsonProperty("small")]
-//         public Uri Small { get; set; }
-
-//         [JsonProperty("normal")]
-//         public Uri Normal { get; set; }
-
-//         [JsonProperty("large")]
-//         public Uri Large { get; set; }
-
-//         [JsonProperty("png")]
-//         public Uri Png { get; set; }
-
-//         [JsonProperty("art_crop")]
-//         public Uri ArtCrop { get; set; }
-
-//         [JsonProperty("border_crop")]
-//         public Uri BorderCrop { get; set; }
-//     }
-
-//     public partial class Legalities
-//     {
-//         [JsonProperty("standard")]
-//         public string Standard { get; set; }
-
-//         [JsonProperty("future")]
-//         public string Future { get; set; }
-
-//         [JsonProperty("historic")]
-//         public string Historic { get; set; }
-
-//         [JsonProperty("gladiator")]
-//         public string Gladiator { get; set; }
-
-//         [JsonProperty("pioneer")]
-//         public string Pioneer { get; set; }
-
-//         [JsonProperty("explorer")]
-//         public string Explorer { get; set; }
-
-//         [JsonProperty("modern")]
-//         public string Modern { get; set; }
-
-//         [JsonProperty("legacy")]
-//         public string Legacy { get; set; }
-
-//         [JsonProperty("pauper")]
-//         public string Pauper { get; set; }
-
-//         [JsonProperty("vintage")]
-//         public string Vintage { get; set; }
-
-//         [JsonProperty("penny")]
-//         public string Penny { get; set; }
-
-//         [JsonProperty("commander")]
-//         public string Commander { get; set; }
-
-//         [JsonProperty("brawl")]
-//         public string Brawl { get; set; }
-
-//         [JsonProperty("historicbrawl")]
-//         public string Historicbrawl { get; set; }
-
-//         [JsonProperty("alchemy")]
-//         public string Alchemy { get; set; }
-
-//         [JsonProperty("paupercommander")]
-//         public string Paupercommander { get; set; }
-
-//         [JsonProperty("duel")]
-//         public string Duel { get; set; }
-
-//         [JsonProperty("oldschool")]
-//         public string Oldschool { get; set; }
-
-//         [JsonProperty("premodern")]
-//         public string Premodern { get; set; }
-//     }
-
-//     public partial class Preview
-//     {
-//         [JsonProperty("source")]
-//         public string Source { get; set; }
-
-//         [JsonProperty("source_uri")]
-//         public Uri SourceUri { get; set; }
-
-//         [JsonProperty("previewed_at")]
-//         public DateTimeOffset PreviewedAt { get; set; }
-//     }
-
-//     public partial class Prices
-//     {
-//         [JsonProperty("usd")]
-//         public string Usd { get; set; }
-
-//         [JsonProperty("usd_foil")]
-//         public string UsdFoil { get; set; }
-
-//         [JsonProperty("usd_etched")]
-//         public object UsdEtched { get; set; }
-
-//         [JsonProperty("eur")]
-//         public string Eur { get; set; }
-
-//         [JsonProperty("eur_foil")]
-//         public string EurFoil { get; set; }
-
-//         [JsonProperty("tix")]
-//         public string Tix { get; set; }
-//     }
-
-//     public partial class PurchaseUris
-//     {
-//         [JsonProperty("tcgplayer")]
-//         public Uri Tcgplayer { get; set; }
-
-//         [JsonProperty("cardmarket")]
-//         public Uri Cardmarket { get; set; }
-
-//         [JsonProperty("cardhoarder")]
-//         public Uri Cardhoarder { get; set; }
-//     }
-
-//     public partial class RelatedUris
-//     {
-//         [JsonProperty("gatherer")]
-//         public Uri Gatherer { get; set; }
-
-//         [JsonProperty("tcgplayer_infinite_articles")]
-//         public Uri TcgplayerInfiniteArticles { get; set; }
-
-//         [JsonProperty("tcgplayer_infinite_decks")]
-//         public Uri TcgplayerInfiniteDecks { get; set; }
-
-//         [JsonProperty("edhrec")]
-//         public Uri Edhrec { get; set; }
-
-//         [JsonProperty("mtgtop8")]
-//         public Uri Mtgtop8 { get; set; }
-//     }
-
-//     public partial class MtgDeckBuilder
-//     {
-//         public static MtgDeckBuilder FromJson(string json) => JsonConvert.DeserializeObject<MtgDeckBuilder>(json, MTGDeck.Models.Converter.Settings);
-//     }
-
-//     public static class Serialize
-//     {
-//         public static string ToJson(this MtgDeckBuilder self) => JsonConvert.SerializeObject(self, MTGDeck.Models.Converter.Settings);
-//     }
-
-//     internal static class Converter
-//     {
-//         public static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
-//         {
-//             MetadataPropertyHandling = MetadataPropertyHandling.Ignore,
-//             DateParseHandling = DateParseHandling.None,
-//             Converters =
-//             {
-//                 new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal }
-//             },
-//         };
-//     }
-
-//     internal class ParseStringConverter : JsonConverter
-//     {
-//         public override bool CanConvert(Type t) => t == typeof(long) || t == typeof(long?);
-
-//         public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
-//         {
-//             if (reader.TokenType == JsonToken.Null) return null;
-//             var value = serializer.Deserialize<string>(reader);
-//             long l;
-//             if (Int64.TryParse(value, out l))
-//             {
-//                 return l;
-//             }
-//             throw new Exception("Cannot unmarshal type long");
-//         }
-
-//         public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
-//         {
-//             if (untypedValue == null)
-//             {
-//                 serializer.Serialize(writer, null);
-//                 return;
-//             }
-//             var value = (long)untypedValue;
-//             serializer.Serialize(writer, value.ToString());
-//             return;
-//         }
-
-//         public static readonly ParseStringConverter Singleton = new ParseStringConverter();
-//     }
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
- 

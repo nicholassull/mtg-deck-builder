@@ -18,6 +18,10 @@
 <br>
 
 <img id="img_logo" alt="Logo" src="@Url.Content(ViewBag.CardImages)"/>
+<p>@ViewBag.CardLegalities</p>
+<p>@ViewBag.CardPrices</p>
+<p>@ViewBag.CardOracle</p>
+<p>@ViewBag.CardFlavor</p>
 
   <div class="row row-cols-2 row-cols-md-2 g-4">
     @foreach (Card card in Model)
@@ -31,8 +35,7 @@
             @card.Name
             @card.Type_Line
             @card.Mana_Cost
-            @card.Colors
-
+            @card.ColorsAsString()
             </p>
           </div>
           <div class="card-footer">

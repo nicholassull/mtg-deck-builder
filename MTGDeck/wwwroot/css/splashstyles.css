@@ -1,0 +1,42 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.logo {
+  width:70vw;
+  height:60vh;
+}
+
+img {
+  position: static;
+  margin-top: 20%;
+  max-width:100%;
+  height:auto;
+  max-height:100%;
+}
+
+
+#title {
+  font-family: 'Rock 3D', cursive;
+  color: rgb(42, 206, 102);
+  margin-top: 3%;
+}
+
+
+body {
+  background: url(https://media.giphy.com/media/VjLPi5lGbBN6dnwfl9/giphy.gif) no-repeat center center fixed;
+  background-size: cover;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  background-color: #101010;
+  color: rgb(250, 250, 250);
+}
+
+
+#subTitle {
+  font-family: 'Montserrat', sans-serif;
+  color: #101010;
+  margin-top: 3%;
+  margin-bottom: 8%;
+}

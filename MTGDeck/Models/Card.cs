@@ -38,15 +38,20 @@ namespace MTGDeck.Models
       return cardList;
     }
     // Requires the name of one card and will return a url of its image.
+    public static Card GetCard(string name)
+    {
+      Card card = ApiHelper.GetCard(name).Result;
+      return card;
+    }
     public static string GetCardImage(string name)
     {
-      ScryfallCard card = ApiHelper.GetCard(name).Result;
+      ScryfallCard card = ApiHelper.GetScryfallCard(name).Result;
       string imageUrl = card.image_uris["normal"];
       return imageUrl;
     }  
     public static string GetLegalities(string name)
     {
-      ScryfallCard card = ApiHelper.GetCard(name).Result;
+      ScryfallCard card = ApiHelper.GetScryfallCard(name).Result;
       string legalities = "";
       foreach((string format, string legality) in card.legalities)
       {
@@ -56,7 +61,7 @@ namespace MTGDeck.Models
     }  
     public static string GetPrices(string name)
     {
-      ScryfallCard card = ApiHelper.GetCard(name).Result;
+      ScryfallCard card = ApiHelper.GetScryfallCard(name).Result;
       string prices = "";
       foreach((string currency, string value) in card.prices)
       {
@@ -66,13 +71,13 @@ namespace MTGDeck.Models
     }  
     public static string GetOracle(string name)
     {
-      ScryfallCard card = ApiHelper.GetCard(name).Result;
+      ScryfallCard card = ApiHelper.GetScryfallCard(name).Result;
       string oracle = card.Oracle_Text;
       return oracle;
     }  
     public static string GetFlavor(string name)
     {
-      ScryfallCard card = ApiHelper.GetCard(name).Result;
+      ScryfallCard card = ApiHelper.GetScryfallCard(name).Result;
       string flavor = card.Flavor_Text;
       return flavor;
     }

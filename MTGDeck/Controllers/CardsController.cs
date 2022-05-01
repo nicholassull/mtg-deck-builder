@@ -35,6 +35,12 @@ namespace MTGDeck.Controllers
       return View();
     }
 
+    public IActionResult Details(string name)
+    {
+      Card card = Card.GetCard(name);
+      return View(card);
+    }
+
     public ActionResult Edit(int id)
     {
       var thisCard = _db.Cards.FirstOrDefault(card => card.CardId == id);
@@ -42,19 +48,19 @@ namespace MTGDeck.Controllers
       return View(thisCard);
     }
 
-    public ActionResult AddDeck(int id)
+    public ActionResult AddCard(int id)
     {
-      var thisCard = _db.Cards.FirstOrDefault(treat => treat.CardId == id);
-      ViewBag.DeckId = new SelectList(_db.Decks, "DeckId", "Name");
+      var thisCard = _db.Cards.FirstOrDefault(card => card.CardId == id);
+      ViewBag.CardId = new SelectList(_db.Cards, "CardId", "Name");
       return View(thisCard);
     }
 
     [HttpPost]
-    public ActionResult AddDeck(Card card, int DeckId)
+    public ActionResult AddCard(Deck deck, int CardId)
     {
-      if (DeckId != 0)
+      if (CardId != 0)
       {
-      _db.CardDecks.Add(new CardDeck() { DeckId = DeckId, CardId = card.CardId });
+      _db.CardDecks.Add(new CardDeck() { CardId = CardId, DeckId = deck.DeckId });
       }
       _db.SaveChanges();
       return RedirectToAction("Index");
@@ -83,5 +89,40 @@ namespace MTGDeck.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+
+    // Grabs the extra info stored in ScryfallCard and assignes passes them to the ViewBag
+    public void storeCardInfo(string cardName)
+        {
+            string cardImages = Card.GetCardImage("Aberrant Mind Sorcerer");
+            ViewBag.CardImages = Url.Content(cardImages);
+            string cardLegalities = Card.GetLegalities("Aberrant Mind Sorcerer");
+            ViewBag.CardLegalities = cardLegalities;
+            string cardPrices = Card.GetPrices("Aberrant Mind Sorcerer");
+            ViewBag.CardPrices = cardPrices;
+            string cardOracle = Card.GetOracle("Aberrant Mind Sorcerer");
+            ViewBag.CardOracle = cardOracle;
+            string cardFlavor = Card.GetFlavor("Aberrant Mind Sorcerer");
+            ViewBag.CardFlavor = cardFlavor;
+        }
   }
 }
+
+// //   public async Task Index()
+// {
+//     var result = await GetCard(); 
+//     var transformed = result.Select(e =>
+//           new Card {
+//               Name = e.cards.name,  
+//               Mana_Cost = e.cards.mana_cost,
+//               Type_Line = e.cards.type_line,
+                //  Set_Name = e.cards.set_name
+//           }
+//     );
+
+//     using var cardInfo = new MTGDeckContext();
+//     foreach(var item in transformed)
+//     {
+//         cardInfo.Cards.Add(item);
+//         await cardInfo.SaveChangesAsync();
+//     }                                            
+// }

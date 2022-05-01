@@ -17,7 +17,17 @@ namespace MTGDeck.Models
       return response.Content;
     }
     //Searches for 1 specific card by fuzzy name. == Used for card details page ==
-    public static async Task<ScryfallCard> GetCard(string name)
+    public static async Task<Card> GetCard(string name)
+    {
+      RestClient client = new RestClient("https://api.scryfall.com");
+      RestRequest request = new RestRequest($"cards/named?fuzzy={name}", Method.GET);
+
+      var response = await client.ExecuteTaskAsync(request);
+      
+      return JsonConvert.DeserializeObject<Card>(response.Content);
+
+    }
+    public static async Task<ScryfallCard> GetScryfallCard(string name)
     {
       RestClient client = new RestClient("https://api.scryfall.com");
       RestRequest request = new RestRequest($"cards/named?fuzzy={name}", Method.GET);

@@ -1,4 +1,4 @@
-@{
+<!-- @{
   Layout = "_Layout";
 }
 
@@ -12,7 +12,9 @@
   <ul>
     @foreach (Card card in Model)
     {
-      <li>@Html.ActionLink($"{card.Name}", "Details", new { id = card.CardId })</li>
+      <li>@Html.ActionLink($"{card.Name}", "Details", new { name = card.Name })</li>
+      <li>@Html.ActionLink($"{card.Color}", "Details", new { color = card.Color })</li>
+      <li>@Html.ActionLink($"{card.Type}", "Details", new { type = card.Type })</li>
     }
   </ul>
 } 
@@ -23,4 +25,14 @@ else
 
 <p>@Html.ActionLink("Add new deck", "Create")</p>
 
-<p>@Html.ActionLink("Home", "Index", "Home")</p>
+<p>@Html.ActionLink("Home", "Index", "Home")</p> -->
+
+<!-- @Html.LabelFor(model => model.Name)
+var searchName = @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @style = "width:250px;" })
+
+@Html.LabelFor(model => model.Color)
+var searchColor = @Html.TextBoxFor(model => model.Color)
+
+@Html.LabelFor(model => model.Type)
+var searchType = @Html.TextBoxFor(model => model.Type) -->
+

@@ -1,16 +1,40 @@
-<!-- @{
+@{
   Layout = "_Layout";
 }
 
 @using MTGDeck.Models;
 @model IEnumerable<MTGDeck.Models.Card>
 
+@using(Html.BeginForm("GetCard", "Cards"))
+{
+  @Html.Label("Search by Name")
+  @Html.TextBox("name")
+  <input type="submit" value="GetCard"/>
+}
+
+@using(Html.BeginForm("Search", "Cards"))
+{
+  @Html.Label("Select Color")
+  @Html.DropDownList("color", new List<SelectListItem>
+  {
+    new SelectListItem { Text = "Black", Value = "B"},
+    new SelectListItem { Text = "Blue", Value = "U"},
+    new SelectListItem { Text = "Red", Value = "R"},
+    new SelectListItem { Text = "White", Value = "W"},
+    new SelectListItem { Text = "Green", Value = "G"},
+    }, "Select Color", new { @class = "form-control" })
+
+//Black = B, Blue = U, Red = R, White = W, Green = G
+
+  @Html.Label("Search by Type")
+  @Html.TextBox("type")
+  <input type="submit" value="Search"/>
+}
+
 <div class="row row-cols-2 row-cols-md-2 g-4">
     @foreach (Card card in Model)
     {
       <li>@Html.ActionLink($"{card.Name}", "Details", new { name = card.Name })</li>
-      <li>@Html.ActionLink($"{card.Color}", "Details", new { color = card.Color })</li>
-      <li>@Html.ActionLink($"{card.Type}", "Details", new { type = card.Type })</li>
     }
   </ul>
 } 
@@ -21,39 +45,9 @@ else
 
 <p>@Html.ActionLink("Add new deck", "Create")</p>
 
-<p>@Html.ActionLink("Home", "Index", "Home")</p> -->
-
-<!-- @Html.LabelFor(model => model.Name)
-var searchName = @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @style = "width:250px;" })
-
-@Html.LabelFor(model => model.Color)
-var searchColor = @Html.TextBoxFor(model => model.Color)
-
-@Html.LabelFor(model => model.Type)
-var searchType = @Html.TextBoxFor(model => model.Type) -->
+<p>@Html.ActionLink("Home", "Index", "Home")</p>
 
 
-      <div class="col">
-        <div class="card">
-          <div class="card-header">@Html.ActionLink($"{card.Name}", "Details", "Cards", new { id = card.CardId })</div>
-          <div class="card-body text-success">
-            <h5 class="card-title">Name</h5>
-            <p class="card-text">
-            @card.Name
-            </p>
-          </div>
-          <div class="card-footer">
-            <p>
-            @foreach(var join in card.JoinEntities)
-              {
-                @Html.ActionLink($"{join.Deck.Name}  ", "Details", "Decks", new { id = join.Deck.DeckId })<text>&nbsp;&nbsp;&nbsp;</text> 
-              } 
-            </p>  
-          </div>
-        </div>
-      </div>
-    }
-  </div>
-  <p>@ViewBag.CardImages</p>
-</div>
 
+
+  

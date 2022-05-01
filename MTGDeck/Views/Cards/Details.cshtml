@@ -1,1 +1,25 @@
-<!-- GetCard(searchName) -->
+<!-- GetCard(searchName)
+All of this info can be accessed by using the ViewBags below
+ViewBag.CardImages, ViewBag.CardLegalities, ViewBag.CardPrices, ViewBag.CardOracle, ViewBag.CardFlavor
+This is how you can use the url in the viewbag
+<img id="img_logo" alt="Logo" src="@Url.Content(ViewBag.CardImages)"/> -->
+@using MTGDeck.Models;
+@model Card;
+
+<h3></h3>
+<img alt="Card image" src="@Url.Content(ViewBag.CardImages)"/>
+
+<!-- Here, we're passing in both the card info and the deck info to first save the card to the DB, then create the join entity -->
+@using (Html.BeginForm("AddCard", "Decks"))
+{
+  //Since we saved the list of categories inside ViewBag.CategoryId, we can provide that here as a string name.
+  @Html.Label("Select Deck")
+  @Html.DropDownList("DeckId")
+
+  @Html.HiddenFor(model => model.Name);
+  @Html.HiddenFor(model => model.Mana_Cost);
+  @Html.HiddenFor(model => model.Type_Line);
+  @Html.HiddenFor(model => model.Set_Name);
+
+  <input type="submit" value="Add to deck" class="btn btn-default" />
+}

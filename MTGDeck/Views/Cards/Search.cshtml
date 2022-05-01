@@ -1,0 +1,16 @@
+@{
+  Layout = "_Layout";
+}
+
+@using MTGDeck.Models;
+@model List<Card>
+
+
+<div class="row row-cols-2 row-cols-md-2 g-4">
+    @foreach (Card card in Model)
+    {
+      <li>@Html.ActionLink($"{card.Name}", "Details", new { name = card.Name })</li>
+      <p>card.Type_Line</p>
+      <p>card.Set_Name</p>
+    }
+  </ul>

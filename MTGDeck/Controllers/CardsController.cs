@@ -28,6 +28,11 @@ namespace MTGDeck.Controllers
     List<Card> result = Card.SearchCards(color, type);
     return View(result);
     }
+    public IActionResult GetCard(string name)
+    {
+      Card result = Card.GetCard(name);
+      return View(result);
+    }
 
     [AllowAnonymous]
     public IActionResult Index()
@@ -37,7 +42,6 @@ namespace MTGDeck.Controllers
             // ViewBag.CardImages = cardImages;
             return View(allCards);
         }
-    
     public ActionResult Create()
     {
       ViewBag.DeckId = new SelectList(_db.Decks, "DeckId", "Name");
@@ -48,6 +52,7 @@ namespace MTGDeck.Controllers
     {
       Card card = Card.GetCard(name);
       storeCardInfo(name);
+      ViewBag.DeckId = new SelectList(_db.Decks, "DeckId", "Name");
       return View(card);
     }
 
@@ -92,7 +97,7 @@ namespace MTGDeck.Controllers
     }
 
     [HttpPost]
-    public ActionResult DeleteFlavor(int joinId)
+    public ActionResult DeleteCard(int joinId)
     {
       var joinEntry = _db.CardDecks.FirstOrDefault(entry => entry.CardDeckId == joinId);
       _db.CardDecks.Remove(joinEntry);
@@ -103,15 +108,15 @@ namespace MTGDeck.Controllers
     // Grabs the extra info stored in ScryfallCard and assignes passes them to the ViewBag
     public void storeCardInfo(string cardName)
         {
-            string cardImages = Card.GetCardImage("Aberrant Mind Sorcerer");
+            string cardImages = Card.GetCardImage(cardName);
             ViewBag.CardImages = Url.Content(cardImages);
-            string cardLegalities = Card.GetLegalities("Aberrant Mind Sorcerer");
+            string cardLegalities = Card.GetLegalities(cardName);
             ViewBag.CardLegalities = cardLegalities;
-            string cardPrices = Card.GetPrices("Aberrant Mind Sorcerer");
+            string cardPrices = Card.GetPrices(cardName);
             ViewBag.CardPrices = cardPrices;
-            string cardOracle = Card.GetOracle("Aberrant Mind Sorcerer");
+            string cardOracle = Card.GetOracle(cardName);
             ViewBag.CardOracle = cardOracle;
-            string cardFlavor = Card.GetFlavor("Aberrant Mind Sorcerer");
+            string cardFlavor = Card.GetFlavor(cardName);
             ViewBag.CardFlavor = cardFlavor;
         }
   }

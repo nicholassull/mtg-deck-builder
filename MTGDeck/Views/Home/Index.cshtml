@@ -1,5 +1,5 @@
 @{
-  Layout = "_Layout";
+  Layout = "_SplashLayout";
 }
 
 @using MTGDeck.Models;
@@ -10,21 +10,21 @@
     <img src="~/images/white_logo_5.svg" alt="Magic the Gathering logo(don't sue me)" class="center" />
     
     <div id="enterButton">
-      <a class="btn btn-primary" href="http://localhost:5001/Account" role="button">Enter</a>
+      @Html.ActionLink("Enter", "Index", "Account", routeValues: null, htmlAttributes: new { @class="btn btn-outline-dark" }) 
     </div>
   </div>
 </div>
 <br>
 
 
-<img id="img_logo" alt="Logo" src="@Url.Content(ViewBag.CardImages)"/>
+<!-- <img id="img_logo" alt="Logo" src="@Url.Content(ViewBag.CardImages)"/>
 <p>@ViewBag.CardLegalities</p>
 <p>@ViewBag.CardPrices</p>
 <p>@ViewBag.CardOracle</p>
-<p>@ViewBag.CardFlavor</p>
+<p>@ViewBag.CardFlavor</p> -->
 
 
-  <div class="row row-cols-2 row-cols-md-2 g-4">
+  <!-- <div class="row row-cols-2 row-cols-md-2 g-4">
     @foreach (Card card in Model)
     {
       <div class="col">
@@ -50,5 +50,5 @@
         </div>
       </div>
     }
-  </div>
+  </div> -->
 </div>

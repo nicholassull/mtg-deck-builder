@@ -22,4 +22,5 @@ This is how you can use the url in the viewbag
   @Html.HiddenFor(model => model.Set_Name);
 
   <input type="submit" value="Add to deck" class="btn btn-default" />
+  <p>@Html.ActionLink("Create a new deck", "Create", "Decks")</p>
 }

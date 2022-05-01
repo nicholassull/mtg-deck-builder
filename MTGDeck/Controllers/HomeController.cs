@@ -18,12 +18,9 @@ namespace MTGDeck.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public ActionResult Index()
         {
-            var allCards = Card.SearchCards("", "", "elf");
-            // string cardImages = Card.SearchImage("", "", "elf");
-            // ViewBag.CardImages = cardImages;
-            return View(allCards);
+            return View();
         }
 
         public IActionResult Privacy()

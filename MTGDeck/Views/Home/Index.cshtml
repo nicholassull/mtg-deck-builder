@@ -13,7 +13,42 @@
       <a class="btn btn-primary" href="http://localhost:5001/Account" role="button">Enter</a>
     </div>
   </div>
+</div>
+<br>
 
 
+<img id="img_logo" alt="Logo" src="@Url.Content(ViewBag.CardImages)"/>
+<p>@ViewBag.CardLegalities</p>
+<p>@ViewBag.CardPrices</p>
+<p>@ViewBag.CardOracle</p>
+<p>@ViewBag.CardFlavor</p>
 
-  
+
+  <div class="row row-cols-2 row-cols-md-2 g-4">
+    @foreach (Card card in Model)
+    {
+      <div class="col">
+        <div class="card">
+          <div class="card-header">@Html.ActionLink($"{card.Name}", "Details", "Cards", new { id = card.CardId })</div>
+          <div class="card-body text-success">
+            <h5 class="card-title">Name</h5>
+            <p class="card-text">
+            @card.Name
+            @card.Type_Line
+            @card.Mana_Cost
+            @card.ColorsAsString()
+            </p>
+          </div>
+          <div class="card-footer">
+            <p>
+            @foreach(var join in card.JoinEntities)
+              {
+                @Html.ActionLink($"{join.Deck.Name}  ", "Details", "Decks", new { id = join.Deck.DeckId })<text>&nbsp;&nbsp;&nbsp;</text> 
+              } 
+            </p>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</div>

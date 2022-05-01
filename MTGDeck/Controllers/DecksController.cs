@@ -80,5 +80,23 @@ namespace MTGDeck.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+
+    //     public ActionResult AddDeck(int id)
+    // {
+    //   var thisCard = _db.Cards.FirstOrDefault(treat => treat.CardId == id);
+    //   ViewBag.DeckId = new SelectList(_db.Decks, "DeckId", "Name");
+    //   return View(thisCard);
+    // }
+
+    // [HttpPost]
+    // public ActionResult AddDeck(Card card, int DeckId)
+    // {
+    //   if (DeckId != 0)
+    //   {
+    //   _db.CardDecks.Add(new CardDeck() { DeckId = DeckId, CardId = card.CardId });
+    //   }
+    //   _db.SaveChanges();
+    //   return RedirectToAction("Index");
+    // }
   }
 }

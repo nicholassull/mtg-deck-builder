@@ -1,4 +1,4 @@
-@{
+<!-- @{
   Layout = "_Layout";
 }
 
@@ -8,6 +8,31 @@
 <div class="row row-cols-2 row-cols-md-2 g-4">
     @foreach (Card card in Model)
     {
+      <li>@Html.ActionLink($"{card.Name}", "Details", new { name = card.Name })</li>
+      <li>@Html.ActionLink($"{card.Color}", "Details", new { color = card.Color })</li>
+      <li>@Html.ActionLink($"{card.Type}", "Details", new { type = card.Type })</li>
+    }
+  </ul>
+} 
+else
+{
+  <h3>No cards have been selected!</h3>
+}
+
+<p>@Html.ActionLink("Add new deck", "Create")</p>
+
+<p>@Html.ActionLink("Home", "Index", "Home")</p> -->
+
+<!-- @Html.LabelFor(model => model.Name)
+var searchName = @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @style = "width:250px;" })
+
+@Html.LabelFor(model => model.Color)
+var searchColor = @Html.TextBoxFor(model => model.Color)
+
+@Html.LabelFor(model => model.Type)
+var searchType = @Html.TextBoxFor(model => model.Type) -->
+
+
       <div class="col">
         <div class="card">
           <div class="card-header">@Html.ActionLink($"{card.Name}", "Details", "Cards", new { id = card.CardId })</div>
@@ -31,3 +56,4 @@
   </div>
   <p>@ViewBag.CardImages</p>
 </div>
+

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MTGDeck.Models
 {
@@ -14,15 +15,19 @@ namespace MTGDeck.Models
         public int CardId { get; set; }
         public string Name { get; set; }
         public string Mana_Cost { get; set; }
-        // public string Colors { get; set; }
+        [NotMapped]
+        public string[] Colors { get; set; }
+        public string ColorsAsString() { 
+            string s = "";
+            for (int i = 0; i < (Colors?.Length ?? 0); i++) {
+              s += Colors[i];
+              s += " ";
+            }
+            return s;
+            }
         public string Type_Line { get; set; }
-        public string Oracle_Text {get; set; }
-        // public string Legalities { get; set; }
         public string Set_Name { get; set; }
-        public string Rulings_Uri { get; set; }
-        // public string Image_Uris { get; set; }
-        public virtual ICollection<CardDeck> JoinEntities {get; set; }
-        // public virtual ApplicationUser User { get; set; } 
+        public virtual ICollection<CardDeck> JoinEntities {get; set; } 
 
     public static List<Card> SearchCards(string name, string colors, string type)
     {
@@ -30,27 +35,131 @@ namespace MTGDeck.Models
       var result = apiCallTask.Result;
       JObject jsonResponse = JsonConvert.DeserializeObject<JObject>(result);
       List<Card> cardList = JsonConvert.DeserializeObject<List<Card>>(jsonResponse["data"].ToString());
-      
       return cardList;
     }
-
-//     public static string SearchImage(string name, string colors, string type)
-//     {
-//       var apiCallTask = ApiHelper.Search(name, colors, type);
-//       var result = apiCallTask.Result;
-//   //the response from the api is being deserialized just as with the other methods like GetAll() and GetDetails()
-//       JObject jsonResponse = JsonConvert.DeserializeObject<JObject>(result);
-//       var imageInfo = jsonResponse["data"][0]["image_uris"]["small"];
-//       string imageResult = JsonConvert.DeserializeObject<string>(imageInfo.ToString());
-//       // string imageList = JsonConvert.DeserializeObject<string>(jsonResponse["data"][0]["image_uris"]["small"].ToString());
-//       Console.WriteLine("=========" + imageInfo + "===========");
-//       return imageResult;
-//     }
+    // Requires the name of one card and will return a url of its image.
+    public static Card GetCard(string name)
+    {
+      Card card = ApiHelper.GetCard(name).Result;
+      return card;
+    }
+    public static string GetCardImage(string name)
+    {
+      ScryfallCard card = ApiHelper.GetScryfallCard(name).Result;
+      string imageUrl = card.image_uris["normal"];
+      return imageUrl;
+    }  
+    public static string GetLegalities(string name)
+    {
+      ScryfallCard card = ApiHelper.GetScryfallCard(name).Result;
+      string legalities = "";
+      foreach((string format, string legality) in card.legalities)
+      {
+        legalities += $"{format}: {legality} ";
+      }
+      return legalities;
+    }  
+    public static string GetPrices(string name)
+    {
+      ScryfallCard card = ApiHelper.GetScryfallCard(name).Result;
+      string prices = "";
+      foreach((string currency, string value) in card.prices)
+      {
+        prices += $"{currency}: {value} ";
+      }
+      return prices;
+    }  
+    public static string GetOracle(string name)
+    {
+      ScryfallCard card = ApiHelper.GetScryfallCard(name).Result;
+      string oracle = card.Oracle_Text;
+      return oracle;
+    }  
+    public static string GetFlavor(string name)
+    {
+      ScryfallCard card = ApiHelper.GetScryfallCard(name).Result;
+      string flavor = card.Flavor_Text;
+      return flavor;
+    }
   }
+
+    public partial class ImageUris
+    {
+        [JsonProperty("normal")]
+        public Uri Normal { get; set; }
+    }
+  public partial class Legalities
+  {
+      [JsonProperty("standard")]
+      public string Standard { get; set; }
+
+      [JsonProperty("future")]
+      public string Future { get; set; }
+
+      [JsonProperty("historic")]
+      public string Historic { get; set; }
+
+      [JsonProperty("gladiator")]
+      public string Gladiator { get; set; }
+
+      [JsonProperty("pioneer")]
+      public string Pioneer { get; set; }
+
+      [JsonProperty("explorer")]
+      public string Explorer { get; set; }
+
+      [JsonProperty("modern")]
+      public string Modern { get; set; }
+
+      [JsonProperty("legacy")]
+      public string Legacy { get; set; }
+
+      [JsonProperty("pauper")]
+      public string Pauper { get; set; }
+
+      [JsonProperty("vintage")]
+      public string Vintage { get; set; }
+
+      [JsonProperty("penny")]
+      public string Penny { get; set; }
+
+      [JsonProperty("commander")]
+      public string Commander { get; set; }
+
+      [JsonProperty("brawl")]
+      public string Brawl { get; set; }
+
+      [JsonProperty("historicbrawl")]
+      public string Historicbrawl { get; set; }
+
+      [JsonProperty("alchemy")]
+      public string Alchemy { get; set; }
+
+      [JsonProperty("paupercommander")]
+      public string Paupercommander { get; set; }
+
+      [JsonProperty("duel")]
+      public string Duel { get; set; }
+
+      [JsonProperty("oldschool")]
+      public string Oldschool { get; set; }
+
+      [JsonProperty("premodern")]
+      public string Premodern { get; set; }
+  }
+   public partial class Prices
+    {
+        [JsonProperty("usd")]
+        public string Usd { get; set; }
+
+        [JsonProperty("usd_foil")]
+        public string UsdFoil { get; set; }
+
+        [JsonProperty("eur")]
+        public string Eur { get; set; }
+
+        [JsonProperty("eur_foil")]
+        public string EurFoil { get; set; }
+
+    }
 }
-
-
-// var rateInfo = json["HotelListResponse"]["HotelList"]["HotelSummary"][0]["RoomRateDetailsList"]["RoomRateDetails"]["RateInfos"]["RateInfo"];
-
-// var result =JsonConvert.DeserializeObject<RateInfo>( rateInfo .ToString() );
- 

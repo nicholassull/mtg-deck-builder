@@ -20,12 +20,39 @@ namespace MTGDeck.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            var allCards = Card.SearchCards("", "U", "");
+            // string cardImages = Card.GetCardImage("Aberrant Mind Sorcerer");
+            // ViewBag.CardImages = Url.Content(cardImages);
+            // string cardLegalities = Card.GetLegalities("Aberrant Mind Sorcerer");
+            // ViewBag.CardLegalities = cardLegalities;
+            // string cardPrices = Card.GetPrices("Aberrant Mind Sorcerer");
+            // ViewBag.CardPrices = cardPrices;
+            // string cardOracle = Card.GetOracle("Aberrant Mind Sorcerer");
+            // ViewBag.CardOracle = cardOracle;
+            // string cardFlavor = Card.GetFlavor("Aberrant Mind Sorcerer");
+            // ViewBag.CardFlavor = cardFlavor;
+            storeCardInfo("Aberrant Mind Sorcerer");
+            return View(allCards);
         }
 
         public IActionResult Privacy()
         {
             return View();
         }
+
+        public void storeCardInfo(string cardName)
+        {
+            string cardImages = Card.GetCardImage("Aberrant Mind Sorcerer");
+            ViewBag.CardImages = Url.Content(cardImages);
+            string cardLegalities = Card.GetLegalities("Aberrant Mind Sorcerer");
+            ViewBag.CardLegalities = cardLegalities;
+            string cardPrices = Card.GetPrices("Aberrant Mind Sorcerer");
+            ViewBag.CardPrices = cardPrices;
+            string cardOracle = Card.GetOracle("Aberrant Mind Sorcerer");
+            ViewBag.CardOracle = cardOracle;
+            string cardFlavor = Card.GetFlavor("Aberrant Mind Sorcerer");
+            ViewBag.CardFlavor = cardFlavor;
+        }
+
     }
 }

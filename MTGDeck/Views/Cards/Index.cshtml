@@ -5,11 +5,7 @@
 @using MTGDeck.Models;
 @model IEnumerable<MTGDeck.Models.Card>
 
-<h1>Cards @User.Identity.Name</h1>
-
-@if (Model.Any())
-{
-  <ul>
+<div class="row row-cols-2 row-cols-md-2 g-4">
     @foreach (Card card in Model)
     {
       <li>@Html.ActionLink($"{card.Name}", "Details", new { name = card.Name })</li>
@@ -35,4 +31,29 @@ var searchColor = @Html.TextBoxFor(model => model.Color)
 
 @Html.LabelFor(model => model.Type)
 var searchType = @Html.TextBoxFor(model => model.Type) -->
+
+
+      <div class="col">
+        <div class="card">
+          <div class="card-header">@Html.ActionLink($"{card.Name}", "Details", "Cards", new { id = card.CardId })</div>
+          <div class="card-body text-success">
+            <h5 class="card-title">Name</h5>
+            <p class="card-text">
+            @card.Name
+            </p>
+          </div>
+          <div class="card-footer">
+            <p>
+            @foreach(var join in card.JoinEntities)
+              {
+                @Html.ActionLink($"{join.Deck.Name}  ", "Details", "Decks", new { id = join.Deck.DeckId })<text>&nbsp;&nbsp;&nbsp;</text> 
+              } 
+            </p>  
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+  <p>@ViewBag.CardImages</p>
+</div>
 

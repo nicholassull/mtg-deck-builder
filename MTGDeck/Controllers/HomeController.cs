@@ -18,7 +18,7 @@ namespace MTGDeck.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public ActionResult Index()
         {
             var allCards = Card.SearchCards("", "U", "");
             // string cardImages = Card.GetCardImage("Aberrant Mind Sorcerer");

@@ -9,10 +9,10 @@ namespace MTGDeck.Models
   class ApiHelper
   {
     // Searches for many cards based on name, color, and type. Returns 0 - many cards.
-    public static async Task<string> Search(string name, string color, string type)
+    public static async Task<string> Search(string color, string type)
     {
       RestClient client = new RestClient("https://api.scryfall.com");
-      RestRequest request = new RestRequest($"cards/search?q={name} c:{color} t:{type}", Method.GET);
+      RestRequest request = new RestRequest($"cards/search?q= c:{color} t:{type}", Method.GET);
       var response = await client.ExecuteTaskAsync(request);
       return response.Content;
     }

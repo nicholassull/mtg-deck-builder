@@ -1,0 +1,17 @@
+@{
+  Layout = "_Layout";
+}
+
+@model MTGDeck.Models.Deck
+
+<h4>Create a new deck</h4>
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(model => model.Name)
+  @Html.TextBoxFor(model => model.FlavorName)
+
+  @Html.LabelFor(model => model.Color)
+  @Html.TextBoxFor(model => model.FlavorName)
+  <input type="submit" value="Add deck" />
+}
+<p>@Html.ActionLink("See deck list", "Index")</p>

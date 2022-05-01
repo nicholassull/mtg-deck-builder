@@ -29,14 +29,22 @@ namespace MTGDeck.Models
         public string Set_Name { get; set; }
         public virtual ICollection<CardDeck> JoinEntities {get; set; } 
 
-    public static List<Card> SearchCards(string name, string colors, string type)
+    public static List<Card> SearchCards(string colors, string type)
     {
-      var apiCallTask = ApiHelper.Search(name, colors, type);
+      var apiCallTask = ApiHelper.Search(colors, type);
       var result = apiCallTask.Result;
       JObject jsonResponse = JsonConvert.DeserializeObject<JObject>(result);
       List<Card> cardList = JsonConvert.DeserializeObject<List<Card>>(jsonResponse["data"].ToString());
       return cardList;
     }
+
+    // public static Card SearchName(string name)
+    // {
+    //   var apiSingleCall = ApiHelper.GetCard(name);
+    //   var result = apisingleCall.Result;
+    //   JObject jsonResponse = JsonConvert.DeserializeObject<JObject>(result);
+    //   Card cardName = JsonConvert.DeserializeObject<Card>(jsonResponse["data"].ToString());
+    // }
     // Requires the name of one card and will return a url of its image.
     public static Card GetCard(string name)
     {

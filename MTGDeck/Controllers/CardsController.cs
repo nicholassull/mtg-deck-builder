@@ -23,16 +23,16 @@ namespace MTGDeck.Controllers
       _db = db;
     }
 
-    public IActionResult Search(string name, string color, string type)
+    public IActionResult Search(string color, string type)
     {
-    List<Card> result = Card.SearchCards(name, color, type);
+    List<Card> result = Card.SearchCards(color, type);
     return View(result);
     }
 
     [AllowAnonymous]
     public IActionResult Index()
         {
-            var allCards = Card.SearchCards("", "", "elf");
+            var allCards = Card.SearchCards("", "elf");
             // string cardImages = Card.SearchImage("", "", "elf");
             // ViewBag.CardImages = cardImages;
             return View(allCards);
@@ -43,10 +43,11 @@ namespace MTGDeck.Controllers
       ViewBag.DeckId = new SelectList(_db.Decks, "DeckId", "Name");
       return View();
     }
-
+    [AllowAnonymous]
     public IActionResult Details(string name)
     {
       Card card = Card.GetCard(name);
+      storeCardInfo(name);
       return View(card);
     }
 
@@ -57,23 +58,23 @@ namespace MTGDeck.Controllers
       return View(thisCard);
     }
 
-    public ActionResult AddCard(int id)
-    {
-      var thisCard = _db.Cards.FirstOrDefault(card => card.CardId == id);
-      ViewBag.CardId = new SelectList(_db.Cards, "CardId", "Name");
-      return View(thisCard);
-    }
+    // public ActionResult AddCard(int id)
+    // {
+    //   var thisCard = _db.Cards.FirstOrDefault(card => card.CardId == id);
+    //   ViewBag.CardId = new SelectList(_db.Cards, "CardId", "Name");
+    //   return View(thisCard);
+    // }
 
-    [HttpPost]
-    public ActionResult AddCard(Deck deck, int CardId)
-    {
-      if (CardId != 0)
-      {
-      _db.CardDecks.Add(new CardDeck() { CardId = CardId, DeckId = deck.DeckId });
-      }
-      _db.SaveChanges();
-      return RedirectToAction("Index");
-    }
+    // [HttpPost]
+    // public ActionResult AddCard(Deck deck, int CardId)
+    // {
+    //   if (CardId != 0)
+    //   {
+    //   _db.CardDecks.Add(new CardDeck() { CardId = CardId, DeckId = deck.DeckId });
+    //   }
+    //   _db.SaveChanges();
+    //   return RedirectToAction("Index");
+    // }
 
     public ActionResult Delete(int id)
     {
@@ -115,23 +116,3 @@ namespace MTGDeck.Controllers
         }
   }
 }
-
-// //   public async Task Index()
-// {
-//     var result = await GetCard(); 
-//     var transformed = result.Select(e =>
-//           new Card {
-//               Name = e.cards.name,  
-//               Mana_Cost = e.cards.mana_cost,
-//               Type_Line = e.cards.type_line,
-                //  Set_Name = e.cards.set_name
-//           }
-//     );
-
-//     using var cardInfo = new MTGDeckContext();
-//     foreach(var item in transformed)
-//     {
-//         cardInfo.Cards.Add(item);
-//         await cardInfo.SaveChangesAsync();
-//     }                                            
-// }

@@ -8,10 +8,7 @@
 @using (Html.BeginForm())
 {
   @Html.LabelFor(model => model.Name)
-  @Html.TextBoxFor(model => model.FlavorName)
-
-  @Html.LabelFor(model => model.Color)
-  @Html.TextBoxFor(model => model.FlavorName)
+  @Html.TextBoxFor(model => model.Name)
   <input type="submit" value="Add deck" />
 }
 <p>@Html.ActionLink("See deck list", "Index")</p>

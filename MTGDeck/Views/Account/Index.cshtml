@@ -4,23 +4,33 @@
 
 @using System.Security.Claims
 
-<h1>Login</h1>
-
-<p>Welcome to Magic the Gathering fantasy deck builder. You must create an account to build and save your decks. Registration is free, but if that's too much of a drag, you can browse cards without an account @Html.ActionLink("Here", "Index", "Cards").</p>
-
-<h2>Get started by logging in or creating a free account!</h2>
-<hr />
-@if (User.Identity.IsAuthenticated)
-{
-    <p>Hello @User.Identity.Name!</p>
-    @using (Html.BeginForm("LogOff", "Account"))
+<div class="row">
+    <div class="col">
+        <h4>Login</h4>
+    </div>
+    <div class="col">
+ @if (User.Identity.IsAuthenticated)
     {
-        <input type="submit" class="btn btn-default" value="Log out" />
+        <p>Hello @User.Identity.Name!</p>
+        @using (Html.BeginForm("LogOff", "Account"))
+        {
+            <input type="submit" class="btn btn-default" value="Log out" />
+        }
     }
-}
-else
-{
-    <p>@Html.ActionLink("Register", "Register")</p>
-    <p>@Html.ActionLink("Log in", "Login")</p>
-}
-<p>@Html.ActionLink("Home", "Index", "Home")</p>
+    else
+    {
+        <p>@Html.ActionLink("Register", "Register")</p>
+        <p>@Html.ActionLink("Log in", "Login")</p>
+    }
+    </div>
+
+<div class="container" id="loginContainer">
+    <div class="loginBackground" style="height: 30vh"> </div>
+        <p>Welcome to Magic the Gathering fantasy deck builder. You must create an account to build and save your decks. Registration is free, but if that's too much of a drag, you can browse cards without an account @Html.ActionLink("Here", "Index", "Cards").</p>
+
+        <p>Get started by logging in or creating a free account!</p>
+   
+
+   
+   
+</div>

@@ -29,20 +29,19 @@ img {
 }
 
 #searchBar {
-  margin-left: 15%;
+  
 }
 
 body {
-  background-image: url(https://media.giphy.com/media/VjLPi5lGbBN6dnwfl9/giphy.gif);
-  background-repeat:no-repeat;
-  background-size: cover;
+  background-color: rgb(250, 250, 250);
+  /* background-repeat:no-repeat;
+  background-size: cover; */
   font-family: 'Montserrat', sans-serif;
-  background-color: #101010;
-  color: rgb(250, 250, 250);
+  color: #101010
 }
 
 .nav-link {
-  color: rgb(250, 250, 250);
+  color: #101010;
 }
 
 
@@ -60,6 +59,21 @@ hr {
 .btn-outline-dark {
   color: rgb(250, 250, 250);
   border-color: rgb(250, 250, 250);
+}
+
+.loginBackground {
+  background: url(https://cdn.discordapp.com/attachments/967858172373135390/970446353626955856/environment_background.png) no-repeat center center fixed;
+  background-size: cover;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  background-color:rgb(250, 250, 250);
+  color:#101010
+}
+
+#loginContainer {
+  background-color: rgb(242, 242, 242);
+  width: 100vw;
+  height: 45vh;
 }
 
 /* font-family: 'Montserrat', sans-serif;

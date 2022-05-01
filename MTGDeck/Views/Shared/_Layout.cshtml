@@ -28,14 +28,6 @@
                 @Html.ActionLink("Decks", "Index", "Decks", null, new { @class = "nav-link"})
               </li>
             </ul>
-            <div class="row">
-              <form id="searchBar" class="form-inline my-lg-0">
-                @using(Html.BeginForm("Index", "Home", FormMethod.Get))
-                {
-                  @Html.TextBox("search") <button class="btn btn-outline-dark" type="submit">Search</button>
-                }
-              </form>
-            </div>
           </div>
         </div>
       </nav>

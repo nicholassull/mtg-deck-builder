@@ -9,7 +9,7 @@
 }
 
 img {
-  position: static;
+  position: relative;
   margin-top: 20%;
   max-width:100%;
   height:auto;

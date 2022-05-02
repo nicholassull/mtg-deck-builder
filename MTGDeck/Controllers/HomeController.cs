@@ -20,7 +20,7 @@ namespace MTGDeck.Controllers
 
         public ActionResult Index()
         {
-            var allCards = Card.SearchCards("U", "");
+            var allCards = Card.SearchCards("", "U", "");
             // string cardImages = Card.GetCardImage("Aberrant Mind Sorcerer");
             // ViewBag.CardImages = Url.Content(cardImages);
             // string cardLegalities = Card.GetLegalities("Aberrant Mind Sorcerer");

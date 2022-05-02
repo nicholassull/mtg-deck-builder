@@ -26,7 +26,7 @@ namespace MTGDeck.Controllers
     public async Task<ActionResult> Index()
     {
       var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-      var currentUser = await _userManager.FindByIdAsync(userId); //wrap in 'if' statement
+      var currentUser = await _userManager.FindByIdAsync(userId);
       var userDecks = _db.Decks.Where(entry => entry.User.Id == currentUser.Id).ToList();
       return View(userDecks);
     }

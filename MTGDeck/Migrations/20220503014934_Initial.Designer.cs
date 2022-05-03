@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MTGDeck.Migrations
 {
     [DbContext(typeof(MTGDeckContext))]
-    [Migration("20220426020345_Initial5")]
-    partial class Initial5
+    [Migration("20220503014934_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -89,25 +89,10 @@ namespace MTGDeck.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Colors")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("Image_Uris")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("Legalities")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
                     b.Property<string>("Mana_Cost")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Name")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("Oracle_Text")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("Rulings_Uri")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Set_Name")
@@ -148,13 +133,15 @@ namespace MTGDeck.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Colors")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
                     b.Property<string>("Name")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
+
                     b.HasKey("DeckId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Decks");
                 });
@@ -304,6 +291,15 @@ namespace MTGDeck.Migrations
                     b.Navigation("Card");
 
                     b.Navigation("Deck");
+                });
+
+            modelBuilder.Entity("MTGDeck.Models.Deck", b =>
+                {
+                    b.HasOne("MTGDeck.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

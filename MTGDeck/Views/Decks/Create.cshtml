@@ -4,11 +4,16 @@
 
 @model MTGDeck.Models.Deck
 
-<h4>Create a new deck</h4>
+<h4>Create Deck</h4>
+
 @using (Html.BeginForm())
 {
-  @Html.LabelFor(model => model.Name)
-  @Html.TextBoxFor(model => model.Name)
-  <input type="submit" value="Add deck" />
+  <div class="form-group">
+    @Html.LabelFor(model => model.Name, "")
+    @Html.TextBoxFor(model => model.Name, new { @style = "width:250px;", @class = "form-control", placeholder = "Name", required = "required"})
+  </div>
+  <br>
+  <div>
+    <input type="submit" value="Add deck" class="btn btn-dark" />
+  </div>
 }
-<p>@Html.ActionLink("See deck list", "Index")</p>

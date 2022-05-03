@@ -4,10 +4,10 @@
 
 @model MTGDeck.Models.Deck;
 
-<h2>Deck Details</h2>
-<hr />
-<h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</h3>
+<h2>@Html.DisplayFor(model => model.Name)</h2>
+<p>@Html.ActionLink("Edit", "Edit", new { id = Model.DeckId }) @Html.ActionLink("Delete", "Delete", new { id = Model.DeckId })</p>
 
+<div class="content">
 @if(@Model.JoinEntities.Count == 0)
 {
   <p>This deck is empty</p>
@@ -22,7 +22,4 @@ else
   }
   </ul>
 }
-
-<p>@Html.ActionLink("Back to deck list", "Index")</p>
-<p>@Html.ActionLink("Edit this deck", "Edit", new { id = Model.DeckId })</p>
-<p>@Html.ActionLink("Delete this deck", "Delete", new { id = Model.DeckId })</p>
+</div>

@@ -85,16 +85,31 @@ namespace MTGDeck.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
-    public ActionResult AddCard(Card card, Deck deck, int DeckId, int CardId)
+    public ActionResult AddCard(Card card, int DeckId)
     {
       Console.WriteLine("=========" + card.Name + "==========");
       Console.WriteLine("=========" + DeckId + "=========");
+      var thisDeck = _db.Decks.FirstOrDefault(deck => deck.DeckId == DeckId);
       _db.Cards.Add(card);
       _db.SaveChanges();
       if (DeckId != 0)
       {
-      _db.CardDecks.Add(new CardDeck() { CardId = card.CardId, DeckId = deck.DeckId });
+        _db.CardDecks.Add(new CardDeck() { CardId = card.CardId, DeckId = thisDeck.DeckId }); 
+        // thisDeck.AddManaCost(card);
+        thisDeck.AddLand(card);
       }
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
+    [HttpPost]
+    public ActionResult DeleteCard(int joinId)
+    {
+      var joinEntry = _db.CardDecks.FirstOrDefault(entry => entry.CardDeckId == joinId);
+      var thisDeck = joinEntry.Deck;
+      var thisCard = joinEntry.Card;
+      // thisDeck.RemoveManaCost(thisCard);
+      thisDeck.RemoveLand(thisCard);
+      _db.CardDecks.Remove(joinEntry);
       _db.SaveChanges();
       return RedirectToAction("Index");
     }

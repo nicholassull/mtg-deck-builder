@@ -60,15 +60,6 @@ namespace MTGDeck.Controllers
       return RedirectToAction("Index");
     }
 
-    [HttpPost]
-    public ActionResult DeleteCard(int joinId)
-    {
-      var joinEntry = _db.CardDecks.FirstOrDefault(entry => entry.CardDeckId == joinId);
-      _db.CardDecks.Remove(joinEntry);
-      _db.SaveChanges();
-      return RedirectToAction("Index");
-    }
-
     // Grabs the extra info stored in ScryfallCard and assignes passes them to the ViewBag
     public void storeCardInfo(string cardName)
         {

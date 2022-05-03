@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MTGDeck.Migrations
 {
     [DbContext(typeof(MTGDeckContext))]
-    [Migration("20220427020907_Initial")]
+    [Migration("20220503032416_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -89,19 +89,13 @@ namespace MTGDeck.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Image_Uris")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                    b.Property<float>("Cmc")
+                        .HasColumnType("float");
 
                     b.Property<string>("Mana_Cost")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Name")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("Oracle_Text")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("Rulings_Uri")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Set_Name")
@@ -142,11 +136,32 @@ namespace MTGDeck.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Colors")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                    b.Property<int>("FiveCost")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FourCost")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LandCount")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int>("OneCost")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SevenCost")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SixCost")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ThreeCost")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TwoCost")
+                        .HasColumnType("int");
 
                     b.Property<string>("UserId")
                         .HasColumnType("varchar(255) CHARACTER SET utf8mb4");

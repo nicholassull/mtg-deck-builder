@@ -14,6 +14,8 @@ namespace MTGDeck.Models
       }
         public int CardId { get; set; }
         public string Name { get; set; }
+        // [JsonProperty("cmc")]
+        // public long Cmc { get; set;}
         public string Mana_Cost { get; set; }
         [NotMapped]
         public string[] Colors { get; set; }

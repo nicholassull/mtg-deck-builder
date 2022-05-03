@@ -17,10 +17,10 @@
     }
   </ul>
   <br>
+  @Html.ActionLink("+New Deck", "Create", null, routeValues: null, htmlAttributes: new { @class="btn btn-success btn-sm" })
 } 
 else
 {
-  <h4></h4>
-}
-@Html.ActionLink("+New Deck", "Create", null, routeValues: null, htmlAttributes: new { @class="btn btn-success btn-sm" }) 
+  @Html.ActionLink("+New Deck", "Create", null, routeValues: null, htmlAttributes: new { @class="btn btn-success btn-sm" })
+} 
 </div>

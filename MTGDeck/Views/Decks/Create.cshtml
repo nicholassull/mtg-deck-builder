@@ -4,8 +4,8 @@
 
 @model MTGDeck.Models.Deck
 
-<h4>Create Deck</h4>
-
+<h3 class="page-title">Create Deck</h3>
+<div class="content">
 @using (Html.BeginForm())
 {
   <div class="form-group">
@@ -14,6 +14,7 @@
   </div>
   <br>
   <div>
-    <input type="submit" value="Add deck" class="btn btn-dark" />
+    <input type="submit" value="Add deck" class="btn btn-success btn-sm" />
   </div>
 }
+</div>

@@ -4,11 +4,11 @@
 
 @model MTGDeck.Models.Deck
 
-<h2>Delete this deck?</h2>
-
-@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)
+<h3>Deleting @Html.DisplayFor(model => model.Name)?</h3>
+<div class="content">
+<p>Are you sure?</p>
 @using (Html.BeginForm())
 {
-  <input type="submit" value="Delete" />
+  <input style="margin-bottom: 5px;" type="submit" value="Delete" class="btn btn-danger btn-sm"/>
 }
-@Html.ActionLink("Back to deck list", "Index")
+</div>

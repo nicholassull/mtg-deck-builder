@@ -4,9 +4,10 @@
 
 @using MTGDeck.Models;
 @model IEnumerable<MTGDeck.Models.Deck>
+
+<h3 class="page-title">My Decks</h3>
+
 <div class="content">
-<h2>My Decks</h2>
-<br>
 @if (Model.Any())
 {
   <ul>
@@ -15,14 +16,11 @@
       <li>@Html.ActionLink($"{deck.Name}", "Details", new { id = deck.DeckId })</li>
     }
   </ul>
+  <br>
 } 
 else
 {
-  <h3>No decks have been built yet!</h3>
+  <h4></h4>
 }
+@Html.ActionLink("+New Deck", "Create", null, routeValues: null, htmlAttributes: new { @class="btn btn-success btn-sm" }) 
 </div>
-<div class="footer">@Html.ActionLink("Add new deck", "Create")</div>
-
-<!-- <p>@Html.ActionLink("Add new deck", "Create")</p>
-
-<p>@Html.ActionLink("Home", "Index", "Home")</p> -->

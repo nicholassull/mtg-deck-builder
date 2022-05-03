@@ -4,8 +4,8 @@
 
 @model MTGDeck.Models.Deck;
 
-<h2>@Html.DisplayFor(model => model.Name)</h2>
-<p>@Html.ActionLink("Edit", "Edit", new { id = Model.DeckId }) @Html.ActionLink("Delete", "Delete", new { id = Model.DeckId })</p>
+<h3 class="page-title">@Html.DisplayFor(model => model.Name)</h3>
+<p class="links">@Html.ActionLink("Rename", "Edit", new { id = Model.DeckId }) | @Html.ActionLink("Delete", "Delete", new { id = Model.DeckId })</p>
 
 <div class="content">
 @if(@Model.JoinEntities.Count == 0)
@@ -14,7 +14,7 @@
 }
 else
 {
-  <h4>Cards in this deck:</h4>
+  <h5>Cards in this deck:</h5>
   <ul>
   @foreach(var join in Model.JoinEntities)
   {
@@ -22,4 +22,6 @@ else
   }
   </ul>
 }
+<br>
+@Html.ActionLink("+Add Card", "Index", "Cards", routeValues: null, htmlAttributes: new { @class="btn btn-success btn-sm" })
 </div>

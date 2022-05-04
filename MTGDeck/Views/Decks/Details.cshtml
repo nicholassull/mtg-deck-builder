@@ -3,11 +3,11 @@
 }
 
 @model MTGDeck.Models.Deck;
-
+<div class="content">
 <h3 class="page-title">@Html.DisplayFor(model => model.Name)</h3>
 <p class="links">@Html.ActionLink("Rename", "Edit", new { id = Model.DeckId }) | @Html.ActionLink("Delete", "Delete", new { id = Model.DeckId })</p>
+<hr />
 
-<div class="content">
 @if(@Model.JoinEntities.Count == 0)
 {
   @Html.ActionLink("+Add Card", "Index", "Cards", routeValues: null, htmlAttributes: new { @class="btn btn-success btn-sm" })

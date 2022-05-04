@@ -1,6 +1,6 @@
 * {
-  margin: 0;
-  padding: 0;
+  margin: 0px;
+  padding: 0px;
 }
 
 .logo {
@@ -25,8 +25,8 @@ body {
   background-color: rgb(250, 250, 250);
   /* background-repeat:no-repeat;
   background-size: cover; */
-  font-family: 'Montserrat', sans-serif;
-  color: #101010
+  font-family: 'Poppins', sans-serif;
+  color: #101010;
 }
 
 hr {
@@ -34,7 +34,7 @@ hr {
 }
 
 #subTitle {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Poppins', sans-serif;
   color: #101010;
   margin-top: 3%;
   margin-bottom: 8%;
@@ -49,10 +49,15 @@ hr {
   background: url(https://cdn.discordapp.com/attachments/967858172373135390/970446353626955856/environment_background.png) no-repeat center center fixed;
   background-size: cover;
   text-align: center;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Poppins', sans-serif;
   background-color:rgb(250, 250, 250);
   color:#101010 
 } 
+
+/* .cardsBackground {
+  background: url(https://get.wallhere.com/photo/sky-clouds-fantasy-city-ArtStation-artwork-fantasy-art-1747289.jpg) no-repeat center center fixed;
+  background-size: cover;
+} */
 
 #loginContainer {
   background-color: rgb(250, 250, 250);

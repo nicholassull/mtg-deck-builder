@@ -18,7 +18,7 @@ else
   <ul>
   @foreach(var join in Model.JoinEntities)
   {
-    <li>@join.Card.Name</li>
+    <li>@Html.ActionLink($"{join.Card.Name}", "Details", "Cards", new { name = join.Card.Name}) | @Html.ActionLink("Delete", "DeleteCard", new { joinId = join.CardDeckId })</li>
   }
   </ul>
   <br>

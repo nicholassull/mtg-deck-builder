@@ -5,14 +5,14 @@
 @using MTGDeck.Models;
 @model IEnumerable<MTGDeck.Models.Card>
 
-<div class="container-fluid">
+<div class="search-content container-fluid">
   <div class="row">
     <div class="col">
       @using(Html.BeginForm("GetCard", "Cards"))
       {
         @Html.Label("Search by Name")
         @Html.TextBox("name")
-        <input type="submit" value="GetCard"/>
+        <input type="submit" value="GetCard" class="btn btn-primary btn-sm"/>
       }
     </div>
     <div class="col">
@@ -28,7 +28,7 @@
         </div>
         <div class="row">
           <div class="col">
-            @Html.Label("Select Color")
+            @Html.Label("Search by Color")
           </div>
           <div class="col">
             @Html.DropDownList("color", new List<SelectListItem>
@@ -38,7 +38,7 @@
               new SelectListItem { Text = "Red", Value = "R"},
               new SelectListItem { Text = "White", Value = "W"},
               new SelectListItem { Text = "Green", Value = "G"},
-              }, "Select Color", new { @class = "form-control", @style = "width:250px;" })
+              }, "Select Color", new { @style = "width:190px;" })
           </div>
         </div>
         <div class="row">
@@ -48,7 +48,7 @@
           <div class="col">
             @Html.TextBox("type")
           </div>
-        <input type="submit" value="Search"/>
+        <input type="submit" value="Search" class="btn btn-primary btn-sm" style="margin-top: 5px;"/>
         </div>
       }
     </div>

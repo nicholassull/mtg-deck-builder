@@ -3,6 +3,7 @@ using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel;
 
 namespace MTGDeck.Models
 {
@@ -14,6 +15,10 @@ namespace MTGDeck.Models
       }
         public int CardId { get; set; }
         public string Name { get; set; }
+        [NotMapped]
+        public Prices Prices { get; set; }
+        [NotMapped]
+        public Legalities Legalities { get; set; }
         public string Mana_Cost { get; set; }
         [NotMapped]
         public string[] Colors { get; set; }
@@ -52,7 +57,7 @@ namespace MTGDeck.Models
     public static string GetCardImage(string name)
     {
       ScryfallCard card = ApiHelper.GetScryfallCard(name).Result;
-      string imageUrl = card.image_uris["normal"];
+      string imageUrl = card.image_uris["border_crop"];
       return imageUrl;
     }  
     public static string GetLegalities(string name)
@@ -61,7 +66,7 @@ namespace MTGDeck.Models
       string legalities = "";
       foreach((string format, string legality) in card.legalities)
       {
-        legalities += $"{format}: {legality} ";
+        legalities += $"{format}: {legality}, ";
       }
       return legalities;
     }  
@@ -71,7 +76,7 @@ namespace MTGDeck.Models
       string prices = "";
       foreach((string currency, string value) in card.prices)
       {
-        prices += $"{currency}: {value} ";
+        prices += $"{currency}: {value}, ";
       }
       return prices;
     }  
@@ -91,8 +96,8 @@ namespace MTGDeck.Models
 
     public partial class ImageUris
     {
-        [JsonProperty("normal")]
-        public Uri Normal { get; set; }
+        [JsonProperty("border_crop")]
+        public Uri BorderCrop { get; set; }
     }
   public partial class Legalities
   {
@@ -155,17 +160,20 @@ namespace MTGDeck.Models
   }
    public partial class Prices
     {
+        [DisplayName("USD")]
         [JsonProperty("usd")]
         public string Usd { get; set; }
 
+        [DisplayName("USD Foil")]
         [JsonProperty("usd_foil")]
         public string UsdFoil { get; set; }
 
+        [DisplayName("EUR")]
         [JsonProperty("eur")]
         public string Eur { get; set; }
 
+        [DisplayName("EUR Foil")]
         [JsonProperty("eur_foil")]
         public string EurFoil { get; set; }
-
     }
 }

@@ -56,10 +56,7 @@ namespace MTGDeck.Migrations
                     Name = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
                     Mana_Cost = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
                     Type_Line = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
-                    Oracle_Text = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
-                    Set_Name = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
-                    Rulings_Uri = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
-                    Image_Uris = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true)
+                    Set_Name = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -179,7 +176,6 @@ namespace MTGDeck.Migrations
                     DeckId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
-                    Colors = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
                     UserId = table.Column<string>(type: "varchar(255) CHARACTER SET utf8mb4", nullable: true)
                 },
                 constraints: table =>

@@ -4,31 +4,36 @@
 
 @using MTGDeck.Models;
 @model IEnumerable<MTGDeck.Models.Card>
+<style>
+body {
+  background-image: url('https://get.wallhere.com/photo/sky-clouds-fantasy-city-ArtStation-artwork-fantasy-art-1747289.jpg');
+}
+</style>
 
-<div class="container-fluid">
+<div class="search-content container-fluid">
   <div class="row">
-    <div class="col">
+    <!-- <div class="col">
       @using(Html.BeginForm("GetCard", "Cards"))
       {
-        @Html.Label("Search by Name")
+        @Html.Label("Get Card by Name")
         @Html.TextBox("name")
-        <input type="submit" value="GetCard"/>
+        <input type="submit" value="GetCard" class="btn btn-primary btn-sm"/>
       }
-    </div>
-    <div class="col">
+    </div> -->
+    <div class="col-6">
       @using(Html.BeginForm("Search", "Cards"))
       {
-        <div class="row">
-          <div class="col">
+        <div style="margin-bottom: 5px;" class="row">
+          <div  class="col">
             @Html.Label("Search All by Name")
           </div>
           <div class="col">
             @Html.TextBox("name")
           </div>
         </div>
-        <div class="row">
+        <div style="margin-bottom: 5px;" class="row">
           <div class="col">
-            @Html.Label("Select Color")
+            @Html.Label("Search by Color")
           </div>
           <div class="col">
             @Html.DropDownList("color", new List<SelectListItem>
@@ -38,43 +43,36 @@
               new SelectListItem { Text = "Red", Value = "R"},
               new SelectListItem { Text = "White", Value = "W"},
               new SelectListItem { Text = "Green", Value = "G"},
-              }, "Select Color", new { @class = "form-control", @style = "width:250px;" })
+              }, "Select Color", new { @style = "width:161px;" })
           </div>
         </div>
-        <div class="row">
+        <div style="margin-bottom: 5px;" class="row">
           <div class="col">
             @Html.Label("Search by Type")
           </div>
           <div class="col">
             @Html.TextBox("type")
           </div>
-        <input type="submit" value="Search"/>
         </div>
+          <input type="submit" value="Search" class="btn btn-primary btn-sm" style="margin-top: 5px; width: 25%"/>
       }
     </div>
   </div>
 </div>
-  <div class="row row-cols-2 row-cols-md-2 g-4">
+  <div class="row row-cols-2 row-cols-md-2 g-4" id="cardsDiv" class="d-flex justify-content-center">
+    <!-- <div class="cardsBackground" style="height: 100vh"> </div> -->
     @foreach (Card card in Model)
     {
-      <div class="col">
-        <div class="card">
-          <div class="card-header">@Html.ActionLink($"{card.Name}", "Details", new { name = card.Name })</div>
-          <div class="card-body text-dark">
-            <h5 class="card-title"></h5>
-            <p class="card-text">
-            <img src="~/images/circle_full_set.svg" alt="Elemental globes(don't sue me)" class="center" /> 
-          </div>
-        </div>
-          <div class="card-footer">
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="~/images/circle_full_set.svg" alt="Elemental magic orbs" style="height: 8rem;">
+        <div class="card-body">
+          <p class="card-text">@Html.ActionLink($"{card.Name}", "Details", new { name = card.Name })</p>
         </div>
       </div>
     }
   </div>
-else
-{
-  <h3>No cards have been selected!</h3>
-}
+
+
 
 
 

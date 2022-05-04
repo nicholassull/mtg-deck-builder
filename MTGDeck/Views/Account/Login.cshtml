@@ -5,16 +5,22 @@
 @using MTGDeck.ViewModels
 
 @model LoginViewModel
-<h1>Login</h1>
-
+<h2>Log In</h2>
 <hr />
+<div class="w-50 m-auto">
 @using (Html.BeginForm())
 {
-    @Html.LabelFor(m => m.Email)
-    @Html.TextBoxFor(m => m.Email)
-
-    @Html.LabelFor(m => m.Password)
-    @Html.PasswordFor(m => m.Password)
-
-    <input type="submit" value="Log in" class="btn btn-default" />
+  <div class="form-group">
+    @Html.LabelFor(m => m.Email, "")
+    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email", required = "required"})
+  </div>
+  <div class="form-group">
+    @Html.LabelFor(m => m.Password, "")
+    @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password", required = "required"})
+  </div>
+  <br>
+  <div class="text-center">
+    <input type="submit" value="Log In" class="btn btn-success" />
+  </div>
 }
+</div>

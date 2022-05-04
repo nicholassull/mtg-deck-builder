@@ -74,9 +74,9 @@ namespace MTGDeck.Controllers
         {
             string cardImages = Card.GetCardImage(cardName);
             ViewBag.CardImages = Url.Content(cardImages);
-            string cardLegalities = Card.GetLegalities(cardName);
+            string[] cardLegalities = Card.GetLegalities(cardName).Replace("_", " ").Split(", ");
             ViewBag.CardLegalities = cardLegalities;
-            string cardPrices = Card.GetPrices(cardName);
+            string[] cardPrices = Card.GetPrices(cardName).Replace("_", " ").Split(", ");
             ViewBag.CardPrices = cardPrices;
             string cardOracle = Card.GetOracle(cardName);
             ViewBag.CardOracle = cardOracle;

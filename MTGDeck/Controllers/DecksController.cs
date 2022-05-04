@@ -98,5 +98,27 @@ namespace MTGDeck.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+    
+    // [HttpPost, ActionName("DeleteCard")]
+    public ActionResult DeleteCard(int joinId)
+    {
+      var joinEntry = _db.CardDecks.FirstOrDefault(entry => entry.CardDeckId == joinId);
+      var thisDeck = joinEntry.Deck;
+      var thisCard = joinEntry.Card;
+      _db.CardDecks.Remove(joinEntry);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
   }
+
+    //   public ActionResult DeleteCard(int joinId)
+    // {
+    //   var joinEntry = _db.CardDecks.FirstOrDefault(entry => entry.CardDeckId == joinId);
+    //   var thisDeck = joinEntry.Deck;
+    //   var thisCard = joinEntry.Card;
+    //   // thisDeck.RemoveManaCost(thisCard);
+    //   thisDeck.RemoveLand(thisCard);
+    //   _db.CardDecks.Remove(joinEntry);
+    //   _db.SaveChanges();
+    //   return RedirectToAction("Index");
 }

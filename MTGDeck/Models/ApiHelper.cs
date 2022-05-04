@@ -22,7 +22,7 @@ namespace MTGDeck.Models
         }
         else
         {
-          return response.StatusCode.ToString();
+          return "No cards found.";
         }
       }
       else if (color == null)
@@ -30,7 +30,14 @@ namespace MTGDeck.Models
         RestClient client = new RestClient("https://api.scryfall.com");
         RestRequest request = new RestRequest($"cards/search?q={name} t:{type}", Method.GET);
         var response = await client.ExecuteTaskAsync(request);
-        return response.Content;
+        if(response.IsSuccessful)
+        {
+          return response.Content;
+        }
+        else
+        {
+          return "No cards found.";
+        }
       }
       else if (type == null)
       {
@@ -46,20 +53,35 @@ namespace MTGDeck.Models
           return "No cards found.";
         }
       }
-      else if (name == null)
-      {
+        else if (type == null && color == null)
+        {
         RestClient client = new RestClient("https://api.scryfall.com");
-        RestRequest request = new RestRequest($"cards/search?q=c:{color} t:{type}", Method.GET);
+        RestRequest request = new RestRequest($"cards/search?q={name}",  Method.GET);
         var response = await client.ExecuteTaskAsync(request);
+        if (response.IsSuccessful)
+        {
         return response.Content;
+        }
+        else
+        { 
+        return "No cards found.";
+        }
       }
-      else 
+      else
       {
         RestClient client = new RestClient("https://api.scryfall.com");
         RestRequest request = new RestRequest($"cards/search?q={name} c:{color} t:{type}", Method.GET);
         var response = await client.ExecuteTaskAsync(request);
-        return response.Content;
+        if(response.IsSuccessful)
+        {
+          return response.Content;
+        }
+        else
+        {
+          return "No cards found.";
+        }
       }
+
     }
     //Searches for 1 specific card by fuzzy name. == Used for card details page ==
     public static async Task<Card> GetCard(string name)

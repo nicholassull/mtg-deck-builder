@@ -9,14 +9,18 @@ This is how you can use the url in the viewbag
 
 @using MTGDeck.Models;
 @model Card;
-<div id="cardImagePage">
-  <h3 id="cardNameDisplay">@Model.Name</h3>
-  <img alt="Card image" src="@Url.Content(ViewBag.CardImages)"/>
 
+<div id="cardImagePage" class="d-flex justify-content-center">
+  <div id="cardNameDisplay">
+    <h3>@Model.Name</h3>
+  </div>
+  <div id="cardImage">
+    <img alt="Card image" src="@Url.Content(ViewBag.CardImages)"/>
+  </div>
+  
   <!-- Here, we're passing in both the card info and the deck info to first save the card to the DB, then create the join entity -->
   @using (Html.BeginForm("AddCard", "Decks"))
   {
-    //Since we saved the list of categories inside ViewBag.CategoryId, we can provide that here as a string name.
     @Html.Label("Select Deck")
     @Html.DropDownList("DeckId")
 
@@ -25,7 +29,66 @@ This is how you can use the url in the viewbag
     @Html.HiddenFor(model => model.Type_Line);
     @Html.HiddenFor(model => model.Set_Name);
 
-    <input type="submit" value="Add to deck" class="btn btn-default" />
+    <input type="submit" value="Add to deck" class="btn btn-primary btn-sm" />
     <p>@Html.ActionLink("Create a new deck", "Create", "Decks")</p>
   }
+</div>
+  <div class="row">
+    <div class="col-4">
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">+</th>
+            <th scope="col">Legality</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (int i = 0; i <= 9; i++) 
+          {
+              <tr>
+                <td scope="row">@(i+1)</td>
+                <td>@ViewBag.CardLegalities[i]</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  <div class="col-4">
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">+</th>
+          <th scope="col">Legality</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (int j = 10; j <= 18; j++) 
+        {
+            <tr>
+              <td scope="row">@(j+1)</td>
+              <td>@ViewBag.CardLegalities[j]</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  <div class="col-4">
+    <table class="table">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">+</th>
+          <th scope="col">Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (int i = 0; i < ViewBag.CardPrices.Length-1; i++)
+        {
+          <tr>
+            <td scope="row">@(i+1)</td>
+            <td>@ViewBag.CardPrices[i]</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
 </div>

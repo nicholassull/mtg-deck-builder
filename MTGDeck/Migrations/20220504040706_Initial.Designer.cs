@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MTGDeck.Migrations
 {
     [DbContext(typeof(MTGDeckContext))]
-    [Migration("20220503014934_Initial")]
+    [Migration("20220504040706_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

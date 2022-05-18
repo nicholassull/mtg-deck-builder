@@ -2,7 +2,7 @@
 
 #### By **Nathan Conn, Nicholas Sullivan, Chris DePastene, Erin McCulley, Amber Wilwand**
 
-#### This program was designed to build different tyeps of decks that could be stored in a local database and assigned to a user's profile. 
+#### This program was designed to build different types of decks that could be stored in a local database and assigned to a user's profile. 
 
 
 ## Technologies Used

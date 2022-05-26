@@ -1,6 +1,6 @@
 # Magic: The Gathering Deck Builder
 
-#### By **Nathan Conn, Nicholas Sullivan, Chris DePastene, Erin McCulley, Amber Wilwand**
+#### By **Nicholas Sullivan, Nathan Conn, Chris DePastene, Erin McCulley, Amber Wilwand**
 
 #### This program was designed to build different types of decks that could be stored in a local database and assigned to a user's profile. 
 
@@ -43,8 +43,8 @@ The program will make an API call to the Scryfall API and look up a card based o
 ## Contact Me
 
 Let me know if you run into any issues or have questions, ideas, or concerns:
-Co-authored-by: Nathan Conn <nconn34@gmail.com>
 Co-authored-by: Nick Sullivan <nicholassull@gmail.com>
+Co-authored-by: Nathan Conn <nconn34@gmail.com>
 Co-authored-by: Amber Wilwand <amoothenielson@gmail.com>
 Co-authored-by: Chris DePastene <cdepastene@gmail.com>
 Co-authored-by: Erin McCulley <ejmcculley@gmail.com>	
